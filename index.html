@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Editor</title>  
+        <style type="text/css" media="screen">
+            body {
+                overflow: hidden;
+                font-family: Ciutadella,-apple-system,BlinkMacSystemFont,Roboto,Segoe UI,Helvetica,Arial,sans-serif;
+                margin: 0;
+                padding: 0;
+                font-size: 16px;
+            }
+            #editor {
+                float: left; 
+            }
+            #output {
+                border: 0;
+            }
+            button {
+                font-size: 16px;
+                margin-right: 20px;
+            }
+            #header {
+                height: 23px;
+                padding: 10px;
+                border-bottom: 1px solid black;
+            }
+            .gutter {
+                background-color: #888888;
+                float: left;
+                vertical-align: middle;
+                cursor: ew-resize;
+                height: 20px;
+            }
+            .split {
+                overflow-y: auto;
+                overflow-x: hidden;
+            }
+            #logo {
+                margin-bottom: -4px;
+                margin-right: 20px;
+            }
+            select {
+                font-size: 16px;
+                margin-right: 20px;
+            }
+            #stop {
+                display: none;
+            }
+            #reset {
+                display: none;
+            }
+            #save {
+                float: right;
+                margin-right: 10px;
+                display: none;
+            }
+        </style>
+        <script src="js/split.js"></script>
+        <script src="js/htmlhint.js"></script>
+        <script src="js/ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="js/csslint.js"></script>
+        <script src="js/jshint.js"></script>  
+    </head>
+    <body>
+        <header id="header">
+            <nav>
+                <a href="https://code.qantas.com"><img id="logo" src="images/qantas-code.png" alt="Qantas Code" height="20px"></a>
+                Learn to Code: Web Edition - 
+                <select id="lessons">
+                    <option selected="selected">1: HTML Basics</option>
+                </select>
+                <button id="reset" onClick="reload()">Reset the Lesson</button>
+                <button id="run" onClick="execute()">Run the Code</button>
+                <button id="stop" onClick="showInstructions()">Stop the Code</button>
+                <button id="save" onClick="download()">Download your Work</button>
+            </nav>
+        </header>
+        <div id="editor"></div><iframe id="output"></iframe>
+        <script>
+            let h = window.innerHeight - 44
+            let split = Split(['#editor', '#output'],{
+                sizes: [45, 55],
+                gutterSize: 6
+            })
+            var rule_sets = {
+                'tagname-lowercase': true,
+                'attr-lowercase': true,
+                'attr-value-double-quotes': true,
+                'tag-pair': true,
+                'spec-char-escape': true,
+                'id-unique': true,
+                'src-not-empty': true,
+                'attr-no-duplication': true,
+                'csslint': {},
+                'jshint': {
+                    'esversion': 6,
+                    'asi': true
+                } // jshint is used to check javascript
+            };
+            document.getElementById('output').style.height = `${h}px`
+            document.getElementById('editor').style.height = `${h}px`
+
+            var change_timer;
+            let editor = ace.edit("editor")
+            editor.setTheme("ace/theme/twilight")
+            editor.setFontSize(14)
+            editor.on('change', function (e) {
+                clearTimeout(change_timer);
+                change_timer = setTimeout(function() {
+                    updateAnnotations(editor);
+                }, 500);
+            });
+            editor.session.setMode("ace/mode/html")
+            editor.session.on("change", () => {
+                localStorage.setItem("qantas-learn-to-code", editor.getValue())
+            })
+            let code = localStorage.getItem("qantas-learn-to-code")
+            if (code) {
+                editor.setValue(code, -1)
+            }
+            function execute() {
+                let editorCode = editor.getValue()
+                let scripts = /(.*\<body\>)(.*)/gsi
+                let tag = "\<script\>window.onerror = function (msg, url, lineNo, columnNo, error) { document.body.innerHTML = '\<div style=\"background-color: #880000; color: #ffffff; padding: 20px; font-size: 18px;\"\>' + msg + '\<br/\>Line number: ' + lineNo + '\</div\>'; return false; }\</script\>"
+                editorCode = editorCode.replace(scripts, `$1 ${tag} $2`)
+                console.log(editorCode)
+                document.getElementById('output').src = "data:text/html;charset=utf-8," + escape(editorCode)
+            }
+
+            function updateAnnotations(editor) {
+                var code = editor.getValue();
+                var messages = HTMLHint.verify(code, rule_sets);
+                var errors = [], message;
+                for(var i=0, l=messages.length;i<l;i++) {
+                    message = messages[i];
+                    errors.push({
+                        row: message.line-1,
+                        column: message.col-1,
+                        text: message.message,
+                        type: message.type,
+                        raw: message.raw
+                    });
+                }
+                editor.getSession().setAnnotations(errors);
+            }
+        </script>
+
+    </body>
+
+    </html>
