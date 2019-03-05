@@ -98,6 +98,8 @@
         <div id="editor"></div><iframe id="output" src="content/intro.html"></iframe>
         <script>
 
+            let instructionPos = 0
+
             fetch("content/catalog.json")
                 .then(response => response.json())
                 .then(json => {
@@ -202,7 +204,7 @@
         \<title\>Example Page\</title\>
         \<style\>
             body {
-                background-color: #88bbff;
+                background-color: #99FFAA;
             }
         \</style\>
     \</head\>
@@ -211,7 +213,7 @@
         \<p\>This is a web page\</p\>
         \<div id="info"\>\</div\>
         \<script\>
-            document.getElementById("info").innerHTML = "Hello World"
+            info.innerHTML = "Hello World"
         \</script\>
     \</body\>
 \</html\>`, -1)
@@ -221,8 +223,10 @@
                 let scripts = /(.*\<body\>)(.*)/gsi
                 let tag = "\<script\>window.onerror = function (msg, url, lineNo, columnNo, error) { document.body.innerHTML = '\<div style=\"background-color: #880000; color: #ffffff; padding: 20px; font-size: 18px;\"\>' + msg + '\<br/\>Line number: ' + lineNo + '\</div\>'; return false; }\</script\>"
                 editorCode = editorCode.replace(scripts, `$1 ${tag} $2`)
-                console.log(editorCode)
-                document.getElementById('output').src = "data:text/html;charset=utf-8," + escape(editorCode)
+                let output = document.getElementById('output')
+                output.src = "data:text/html;charset=utf-8," + escape(editorCode)
+                instructionPos = output.contentWindow.scrollTop
+                console.log(instructionPos)
                 document.getElementById('run').style.display = "none"
                 document.getElementById('stop').style.display = "inline"
                 let save = document.getElementById('save')
@@ -250,12 +254,14 @@
 
             function showInstructions() {
                 let lessons = document.getElementById('lesson')
+                let output = document.getElementById('output')
                 if (lessons.selectedIndex > 0) {
                     let path = lessons.options[lessons.selectedIndex].value
-                    document.getElementById('output').src = `${window.location.href}content/${path}/instructions.html`
+                    output.src = `${window.location.href}content/${path}/instructions.html`
                 } else {
-                    document.getElementById('output').src = `${window.location.href}content/intro.html`
+                    output.src = `${window.location.href}content/intro.html`
                 }
+                output.contentWindow.scrollTop = instructionPos
                 document.getElementById('run').style.display = "inline"
                 document.getElementById('stop').style.display = "none"
                 document.getElementById('save').style.display = "none"
