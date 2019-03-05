@@ -15,7 +15,7 @@
         <table>
             <tr><td>Math Operation</td><td>Example</td></tr>
             <tr><td>Add</td><td>3 + 6</td></tr>
-            <tr><td>subract</td><td>8 - 5</td></tr>
+            <tr><td>Subtract</td><td>8 - 5</td></tr>
             <tr><td>Multiply</td><td>12 * 9</td></tr>
             <tr><td>Divide</td><td>10 / 2</td></tr>
             <tr><td>To the power of</td><td>4 ** 2</td></tr>
@@ -31,12 +31,12 @@
         <p>Try this expression where the Hello World was...</p>
         <code>`You are about ${21 * 365} days old.`</code>
         <p>The <code>${...}</code> notation is computed as a separate expression and then inserted into the sentence.</p>
-        <p>There are many other ways to manipulate strings. For more infomation see: <a target="_blank" href="https://www.w3schools.com/js/js_strings.asp">www.w3schools.com/js/js_strings</a></p>
+        <p>There are many other ways to manipulate strings. For more information see: <a target="_blank" href="https://www.w3schools.com/js/js_strings.asp">www.w3schools.com/js/js_strings</a></p>
         <h3>Boolean Expressions</h3>
         <p>If you need your code to do different things depending on some input or parameter then we need to have a way of expressing logic. Logic operators results in a value that is <code>true</code> or <code>false</code>.</p>
         <p>Try changing the expression after the equals again to:</p>
         <code>4 &lt; 9</code>
-        <p>In this case the less than operator checks if 4 is less than 9 and returns a value of <code>true</code>. Other boolean opperations include:</p>
+        <p>In this case the less than operator checks if 4 is less than 9 and returns a value of <code>true</code>. Other Boolean operations include:</p>
         <table>
             <tr><td>Boolean Operation</td><td>Example</td></tr>
             <tr><td>Equals</td><td>5 == 3 + 2</td></tr>
@@ -57,7 +57,7 @@
                 result.value = a * b
         </code>
         <h3>Data Types</h3>
-        <p>At this point we should look at data types. Up to now we have been working with strings, numbers and booleans but JavaScript supports other data types such as <code>arrays</code> (which are ordered lists of things) and more complex <code>objects</code> which we will look at in a later lesson.</p>
+        <p>At this point we should look at data types. Up to now we have been working with strings, numbers and Booleans but JavaScript supports other data types such as <code>arrays</code> (which are ordered lists of things) and more complex <code>objects</code> which we will look at in a later lesson.</p>
         <p>To specify an array/list we can use square brackets to both define a list as well as get an item from the list by it's index number (position in the list):</p>
         <code style="display: block">
                 let people = ["Tim", "Karen", "Simon", "Linda"]<br/>
@@ -77,7 +77,7 @@
         </code>
         <p>As you change the index variable you can see how the result is affected.</p>
         <h2>Functions</h2>
-        <p>Functions in code are much like a function in maths, they take parameters and usually produce a result. There are many built-in functions available such as the Math functions we saw earlier an where functions are gouped together like that it's called a library or a library of functions.</p>
+        <p>Functions in code are much like a function in maths, they take parameters and usually produce a result. There are many built-in functions available such as the Math functions we saw earlier an where functions are grouped together like that it's called a library or a library of functions.</p>
         <p>It's easy to define your own functions by using the <code>function</code> keyword. Here is an example:</p>
         <code style="display: block">
                 function greeting(name) {<br/>
@@ -89,7 +89,7 @@
                 result.value = greeting(people[index])<br/>
         </code>
         <p>The function definition consists of a name 'greeting' followed by brackets with the names of the parameters it is expecting to get when called. The body of the function is a code block in <code>{...}</code> curly brackets that is executed when the function is used. Functions have a special key word <code>return</code> that is used to sent the result back to the part of your code that made use of the function.</p>
-        <p>The last line here is takeing the name from the list and then uses the <code>greeting</code> function defined above to turn it into a message.</p>
+        <p>The last line here uses the name from the list and then calls the <code>greeting</code> function to turn it into a message.</p>
         <h2>Loops</h2>
         <p>Computers are great at repeating tasks using loops. Looping over the items in a list is easy using the forEach method of a list.</p>
         <code style="display: block">
@@ -102,7 +102,7 @@
         </code>
         <p>As with other patterns of coding there are other ways of looping over areas of your code. See: <a target="_blank" href="https://www.w3schools.com/js/js_loop_for.asp">www.w3schools.com/js/js_loop_for</a></p>
         <h2>Inline Functions (Closures)</h2>
-        <p>An function can be inserted into an expression rather than being defined with a name. These are also called anonymouse functions or closures and are very useful.</p>
+        <p>An function can be inserted into an expression rather than being defined with a name. These are also called anonymous functions (as they have no name) or closures and are very useful.</p>
         <p>Here is the same result as the last example but using an in-line function rather than a named function:</p>
         <code style="display: block">
                 let people = ["Tim", "Karen", "Simon", "Linda"]<br/>
