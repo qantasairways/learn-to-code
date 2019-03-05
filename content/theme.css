@@ -33,7 +33,7 @@ table, tr {
 td {
     margin: 0;
     padding: 2px 24px 2px 12px;
-    background-color: #eeeeee;
+    background-color: #eaeaea;
 }
 tr:first-child td {
     font-weight: bold;
@@ -50,4 +50,11 @@ tr:last-child td:first-child {
 }
 tr:last-child td:last-child {
     border-radius: 0 0 4px 0;
+}
+pre {
+    background: #eaeaea;
+    padding: 0 20px;
+}
+pre>code {
+    color: #000000;
 }

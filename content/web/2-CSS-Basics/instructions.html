@@ -28,21 +28,21 @@
         <ul>
             <li><code>#<i>id</i></code> - If you want to style a very specific element on your page you can use a selector that starts with a # followed by the value of the id attribute of a HTML element. 
                 In the example code the <code>img</code> element has an id of "cat" so if you wanted to style that image without affecting other elements then you could add this to the style tag:<br/>
-                <code style="display: block;">
-                    #cat {<br/>
-                    &nbsp;border-radius: 40px;<br/>
-                    &nbsp;float: right;<br/>
-                    }
-                </code> 
+                <pre><code>
+#cat {
+    border-radius: 40px;
+    float: right;
+}
+                </code></pre>
                 Which will cause the image with an id attribute of 'cat' to have rounded corners with a radius of 40 pixels and have it 'float' over to the right of the page allowing the paragraphs of text to move up and fix next to the image.
             </li>
             <li><code>.<i>class</i></code> - If you have elements of the same type, such as paragraphs, but you only want to style specific ones then you can assign classes to your HTML and then select all elements with that class name by using a dot 
                 <code>.</code>. For example:
-                <code style="display: block;">
-                        .info {<br/>
-                        &nbsp;background-color: #008800;<br/>
-                        }
-                    </code> 
+                <pre><code>
+.info {
+    background-color: #008800;
+}
+                </code></pre>
                 Which will cause the paragraphs with the class attribute of 'info' to have a green background.</li>
             </ul>
         <p>There are so many more options for styling the HTML elements of your web pages. For a full list of all CSS selectors, declarations and other features see: <a target="_blank" href="https://www.w3schools.com/css">www.w3schools.com/css</a></p>

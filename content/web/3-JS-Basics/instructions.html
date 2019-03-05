@@ -34,8 +34,7 @@
         <p>There are many other ways to manipulate strings. For more information see: <a target="_blank" href="https://www.w3schools.com/js/js_strings.asp">www.w3schools.com/js/js_strings</a></p>
         <h3>Boolean Expressions</h3>
         <p>If you need your code to do different things depending on some input or parameter then we need to have a way of expressing logic. Logic operators results in a value that is <code>true</code> or <code>false</code>.</p>
-        <p>Try changing the expression after the equals again to:</p>
-        <code>4 &lt; 9</code>
+        <p>Try changing the expression after the equals again to <code>4 &lt; 9</code>.</p>
         <p>In this case the less than operator checks if 4 is less than 9 and returns a value of <code>true</code>. Other Boolean operations include:</p>
         <table>
             <tr><td>Boolean Operation</td><td>Example</td></tr>
@@ -51,70 +50,71 @@
         <h2>Variables</h2>
         <p>Rather than just putting information on the page we can store results of expressions in memory so our page or app can use them later. We can give results a name by using the <code>let</code> key word followed by the assignment of an expression.</p>
         <p>Try replacing the contents of the script tag with the following:</p>
-        <code style="display: block">
-                let a = 4<br/>
-                let b = 8<br/>
-                result.value = a * b
-        </code>
+        <pre><code>
+let a = 4
+let b = 8
+result.value = a * b
+        </code></pre>
         <h3>Data Types</h3>
         <p>At this point we should look at data types. Up to now we have been working with strings, numbers and Booleans but JavaScript supports other data types such as <code>arrays</code> (which are ordered lists of things) and more complex <code>objects</code> which we will look at in a later lesson.</p>
         <p>To specify an array/list we can use square brackets to both define a list as well as get an item from the list by it's index number (position in the list):</p>
-        <code style="display: block">
-                let people = ["Tim", "Karen", "Simon", "Linda"]<br/>
-                result.value = people[2]
-        </code>
+        <pre><code>
+let people = ["Tim", "Karen", "Simon", "Linda"]
+result.value = people[2]
+        </code></pre>
         <p>You may have expected to see "Karen" as the result but indexes in JavaScript, and most other languages, start with zero for the first item, 1 for the second, etc..</p>
         <h2>Conditions</h2>
         <p>Conditions let you branch your code into to blocks where one gets used if the condition is true and the other one gets used if it's false. The basic <code>if...else</code> for example required a Boolean Expression (see above) and then has two blocks of code as follows:</p>
-        <code style="display: block">
-                let index = 0<br/>
-                let people = ["Tim", "Karen", "Simon", "Linda"]<br/>
-                if (people[index] == "Tim") {<br/> 
-                    &nbsp;&nbsp;result.value = "Hi Timbo. You are a special case."<br/>
-                } else {<br/>
-                    &nbsp;&nbsp;result.value = `Hello ${people[index]}`<br/>
-                }
-        </code>
+        <pre><code>
+let index = 0
+let people = ["Tim", "Karen", "Simon", "Linda"]
+if (people[index] == "Tim") {
+    result.value = "Hi Timbo. You are a special case."
+} else {
+    result.value = `Hello ${people[index]}`
+}
+        </code></pre>
         <p>As you change the index variable you can see how the result is affected.</p>
         <h2>Functions</h2>
         <p>Functions in code are much like a function in maths, they take parameters and usually produce a result. There are many built-in functions available such as the Math functions we saw earlier an where functions are grouped together like that it's called a library or a library of functions.</p>
         <p>It's easy to define your own functions by using the <code>function</code> keyword. Here is an example:</p>
-        <code style="display: block">
-                function greeting(name) {<br/>
-                    &nbsp;&nbsp;return `Hello ${name}`<br/> 
-                }<br/>
-                &nbsp;<br/>
-                let index = 3<br/>
-                let people = ["Tim", "Karen", "Simon", "Linda"]<br/>
-                result.value = greeting(people[index])<br/>
-        </code>
+        <pre><code>
+function greeting(name) {
+    return `Hello ${name}`
+}
+
+let index = 3
+let people = ["Tim", "Karen", "Simon", "Linda"]
+result.value = greeting(people[index])
+        </code></pre>
         <p>The function definition consists of a name 'greeting' followed by brackets with the names of the parameters it is expecting to get when called. The body of the function is a code block in <code>{...}</code> curly brackets that is executed when the function is used. Functions have a special key word <code>return</code> that is used to sent the result back to the part of your code that made use of the function.</p>
         <p>The last line here uses the name from the list and then calls the <code>greeting</code> function to turn it into a message.</p>
         <h2>Loops</h2>
-        <p>Computers are great at repeating tasks using loops. Looping over the items in a list is easy using the forEach method of a list.</p>
-        <code style="display: block">
-                function initials(name) {<br/>
-                    &nbsp;&nbsp;return name.substring(0, 1)<br/> 
-                }<br/>
-                &nbsp;<br/>
-                let people = ["Tim", "Karen", "Simon", "Linda"]<br/>
-                result.value = people.map(initials)<br/>
-        </code>
+        <p>Computers are great at repeating tasks using loops. Looping over the items in a list is easy using the <code>map</code> method of a list. The <code>map</code> method takes a function as a parameter and applies it to each item in the list. The output is a new list containing each value generated from the supplied function.</p>
+        <pre><code>
+function initials(name) {
+    return name.substring(0, 1)
+}
+
+let people = ["Tim", "Karen", "Simon", "Linda"]
+result.value = people.map(initials)
+        </code></pre>
         <p>As with other patterns of coding there are other ways of looping over areas of your code. See: <a target="_blank" href="https://www.w3schools.com/js/js_loop_for.asp">www.w3schools.com/js/js_loop_for</a></p>
         <h2>Inline Functions (Closures)</h2>
         <p>An function can be inserted into an expression rather than being defined with a name. These are also called anonymous functions (as they have no name) or closures and are very useful.</p>
         <p>Here is the same result as the last example but using an in-line function rather than a named function:</p>
-        <code style="display: block">
-                let people = ["Tim", "Karen", "Simon", "Linda"]<br/>
-                result.value = people.map(function (person) {<br/>
-                    &nbsp;&nbsp;return person.substring(0, 1)<br/> 
-                })<br/>
-        </code>
+        <pre><code>
+let people = ["Tim", "Karen", "Simon", "Linda"]
+result.value = people.map(function (person) {
+    return person.substring(0, 1)
+})
+        </code></pre>
         <p>JavaScript has some short hand for defining a function that doesn't need us to use the code <code>function</code> any more. This is done by specifying the parameters to the function followed by <code>=&gt;</code> and then the expression to apply.</p>
         <p>Also where there is only one parameter we don't need the brackets around the parameters. And if we code in an expression without a code block we don't need the special return key-word either. So the solution simplifies down to:</p>
-        <code style="display: block">
-            let people = ["Tim", "Karen", "Simon", "Linda"]<br/>
-            result.value = people.map(person => person.substring(0, 1))
-        </code>
+        <pre><code>
+let people = ["Tim", "Karen", "Simon", "Linda"]
+result.value = people.map(person => person.substring(0, 1))
+        </code></pre>
+        <p>Nice!</p>
     </body>
 </html>
