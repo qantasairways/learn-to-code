@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>Editor</title>  
+        <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
         <style type="text/css" media="screen">
             body {
                 overflow: hidden;
@@ -42,20 +43,35 @@
                 margin-bottom: -4px;
                 margin-right: 20px;
             }
-            select {
+            #lesson {
                 font-size: 16px;
                 margin-right: 20px;
             }
+            #edition {
+                font-size: 16px;
+            }
+            #run {
+                border: 1px solid #008800;
+                color: #008800;
+                border-radius: 4px;
+            }
             #stop {
                 display: none;
+                border: 1px solid #880000;
+                color: #880000;
+                border-radius: 4px;
             }
             #reset {
                 display: none;
+                border-radius: 4px;
             }
             #save {
-                float: right;
-                margin-right: 10px;
                 display: none;
+                float: right;
+            }
+            #save button {
+                margin-right: 10px;
+                border-radius: 4px;
             }
         </style>
         <script src="js/split.js"></script>
@@ -68,18 +84,64 @@
         <header id="header">
             <nav>
                 <a href="https://code.qantas.com"><img id="logo" src="images/qantas-code.png" alt="Qantas Code" height="20px"></a>
-                Learn to Code: Web Edition - 
-                <select id="lessons">
-                    <option selected="selected">1: HTML Basics</option>
+                Learn to Code: <select id="edition">
+                    <option value="" selected="selected" disabled="disabled">Select an Edition</option>
+                </select> - <select id="lesson">
+                    <option value="" selected="selected" disabled="disabled">Select a Lesson</option>
                 </select>
-                <button id="reset" onClick="reload()">Reset the Lesson</button>
+                <button id="reset" onClick="reload()">Restart the Lesson</button>
                 <button id="run" onClick="execute()">Run the Code</button>
                 <button id="stop" onClick="showInstructions()">Stop the Code</button>
-                <button id="save" onClick="download()">Download your Work</button>
+                <a id="save" href=""><button>Download your Work</button></a>
             </nav>
         </header>
-        <div id="editor"></div><iframe id="output"></iframe>
+        <div id="editor"></div><iframe id="output" src="content/intro.html"></iframe>
         <script>
+
+            fetch("content/catalog.json")
+                .then(response => response.json())
+                .then(json => {
+                    let editions = document.getElementById('edition')
+                    json.editions.map(edition => {
+                        let option = document.createElement("option")
+                        option.text = edition.title
+                        option.value = edition.title
+                        option.lessons = edition.lessons
+                        editions.appendChild(option)
+                    })
+                    editions.addEventListener('change', e => {
+                        var option = editions.options[editions.selectedIndex];
+                        let lessons = document.getElementById('lesson')
+                        lessons.addEventListener('change', e => {
+                            let path = lessons.options[lessons.selectedIndex].value
+                            storageContext = `qantas-learn-to-code/${path}`
+                            let code = localStorage.getItem(storageContext)
+                            if (code) {
+                                editor.setValue(code, -1)
+                            } else {
+                                fetch(`content/${path}/index.html`)
+                                    .then(response => response.text())
+                                    .then(text => {
+                                        editor.setValue(text, -1)
+                                    })
+                            }
+                            document.getElementById('output').src = `${window.location.href}content/${path}/instructions.html`
+                            document.getElementById('reset').style.display = "inline"
+                            document.getElementById('run').style.display = "inline"
+                            document.getElementById('stop').style.display = "none"
+                            document.getElementById('save').style.display = "none"
+                        })
+                        option.lessons.map(lesson => {
+                            let option = document.createElement("option")
+                            option.text = lesson.title
+                            option.value = lesson.path
+                            lessons.appendChild(option)
+                        })
+                    })
+                })
+
+            
+
             let h = window.innerHeight - 44
             let split = Split(['#editor', '#output'],{
                 sizes: [45, 55],
@@ -102,10 +164,17 @@
             };
             document.getElementById('output').style.height = `${h}px`
             document.getElementById('editor').style.height = `${h}px`
+            document.getElementsByClassName('gutter')[0].style.height = `${h}px`
 
             var change_timer;
             let editor = ace.edit("editor")
+            editor.setOptions({
+                printMargin: false
+            })
             editor.setTheme("ace/theme/twilight")
+            if(window.location.hash === "#light") {
+                editor.setTheme("ace/theme/chrome")
+            }
             editor.setFontSize(14)
             editor.on('change', function (e) {
                 clearTimeout(change_timer);
@@ -114,12 +183,38 @@
                 }, 500);
             });
             editor.session.setMode("ace/mode/html")
+            let path = "intro"
+            let lessons = document.getElementById('lesson')
+            if (lessons.selectedIndex > 0) {
+                path = lessons.options[lessons.selectedIndex].value
+            }
+            let storageContext = `qantas-learn-to-code/${path}`
             editor.session.on("change", () => {
-                localStorage.setItem("qantas-learn-to-code", editor.getValue())
+                localStorage.setItem(storageContext, editor.getValue())
             })
-            let code = localStorage.getItem("qantas-learn-to-code")
+            let code = localStorage.getItem(storageContext)
             if (code) {
                 editor.setValue(code, -1)
+            } else {
+                editor.setValue(`\<!DOCTYPE html\>
+\<html\>
+    \<head\>
+        \<title\>Example Page\</title\>
+        \<style\>
+            body {
+                background-color: #88bbff;
+            }
+        \</style\>
+    \</head\>
+    \<body\>
+        \<h1\>Welcome\</h1\>
+        \<p\>This is a web page\</p\>
+        \<div id="info"\>\</div\>
+        \<script\>
+            document.getElementById("info").innerHTML = "Hello World"
+        \</script\>
+    \</body\>
+\</html\>`, -1)
             }
             function execute() {
                 let editorCode = editor.getValue()
@@ -128,6 +223,12 @@
                 editorCode = editorCode.replace(scripts, `$1 ${tag} $2`)
                 console.log(editorCode)
                 document.getElementById('output').src = "data:text/html;charset=utf-8," + escape(editorCode)
+                document.getElementById('run').style.display = "none"
+                document.getElementById('stop').style.display = "inline"
+                let save = document.getElementById('save')
+                save.style.display = "inline"
+                save.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(editor.getValue()));
+                save.setAttribute('download', "my-page.html");
             }
 
             function updateAnnotations(editor) {
@@ -146,6 +247,38 @@
                 }
                 editor.getSession().setAnnotations(errors);
             }
+
+            function showInstructions() {
+                let lessons = document.getElementById('lesson')
+                if (lessons.selectedIndex > 0) {
+                    let path = lessons.options[lessons.selectedIndex].value
+                    document.getElementById('output').src = `${window.location.href}content/${path}/instructions.html`
+                } else {
+                    document.getElementById('output').src = `${window.location.href}content/intro.html`
+                }
+                document.getElementById('run').style.display = "inline"
+                document.getElementById('stop').style.display = "none"
+                document.getElementById('save').style.display = "none"
+            }
+
+            function reload() {
+                let lessons = document.getElementById('lesson')
+                if (lessons.selectedIndex > 0) {
+                    let path = lessons.options[lessons.selectedIndex].value
+                    fetch(`content/${path}/index.html`)
+                        .then(response => response.text())
+                        .then(text => {
+                            editor.setValue(text, -1)
+                        })
+                    document.getElementById('output').src = `${window.location.href}content/${path}/instructions.html`
+                } else {
+                    document.getElementById('output').src = `${window.location.href}content/intro.html`
+                }
+                document.getElementById('run').style.display = "inline"
+                document.getElementById('stop').style.display = "none"
+                document.getElementById('save').style.display = "none"
+            }
+
         </script>
 
     </body>

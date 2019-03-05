@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>            
+        <link rel="stylesheet" href="/learn-to-code/content/theme.css">
+    </head>
+    <body>
+        <aside>Learn to Code - Web Edition</aside>
+        <h1>Code in Style - CSS</h1>
+        <p>You can code styling into your web page using a language called CSS (Cascading Style Sheets). These style codes are applied using the <code>&ltstyle&gt<i>css codes</i>&lt/style&gt</code> HTML tag.</p>
+        <h2>Selectors and Declarations</h2>
+        <p>Each section of CSS code consists of a selector followed by a number of declarations grouped by a pair of braces (curley brackets).</p>
+        <p>In the code on the left the selector is the <code>h1</code> and the declarations are:</p>
+        <code>color: #8800ff;</code><br/>
+        <code>font-size: 30px;</code>
+        <p>A selector is used to specify which HTML elements on your page should be styled using the declarations that follow. 
+        In this case the selector <code>h1</code> tells the browser to apply two style declarations to all level 1 headings on the page.</p>
+        <p>Declarations consists two parts <code><i>property</i></code>: <code><i>value</i></code>; and in this example they specify the following browser behaviours:</p>
+        <ul>
+            <li><code>color: #8800FF;</code> - This sets the color of the text for the selected elements. The color value is made up of a number in HEX (Hexadecimal) which is a base 16 number format using 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, a, b, c, d, e, f. 
+                The color code starts with a <code>#</code> and then has a pair of HEX digits for the amounts of RED, GREEN and BLUE to mix together. 
+                As each single digit can be between 0 and 15, each pair can be a number between 0 and 255 which gives you 255 levels of brightness per primary color or a total of over 16 million mixed colors.
+                So #<span style="color: red;">88</span><span style="color: green;">00</span><span style="color: blue;">FF</span>; means about half the amount of possible red, no green at all and full blue.
+                Try changing the digits in the color declaration and <code>Run the Code</code> to see how it affects the heading.
+            </li>
+            <li><code>font-size: 30px</code> - This sets the size of the font for the selected elements on the page. In this case the units of measurment are pixels (px).</li>
+        </ul>
+        <h2>Other types of Selectors</h2>
+        <ul>
+            <li><code>#<i>id</i></code> - If you want to style a very specific element on your page you can use a selector that starts with a # followed by the value of the id attribute of a HTML element. 
+                In the example code the <code>img</code> element has an id of "cat" so if you wanted to style that image without affecting other elements then you could add this to the style tag:<br/>
+                <code style="display: block;">
+                    #cat {<br/>
+                    &nbsp;border-radius: 40px;<br/>
+                    &nbsp;float: right;<br/>
+                    }
+                </code> 
+                Which will cause the image with an id attribute of 'cat' to have rounded corners with a radius of 40 pixels and have it 'float' over to the right of the page allowing the paragraphs of text to move up and fix next to the image.
+            </li>
+            <li><code>.<i>class</i></code> - If you have elements of the same type, such as paragraphs, but you only want to style specific ones then you can assign classes to your HTML and then select all elements with that class name by using a dot 
+                <code>.</code>. For example:
+                <code style="display: block;">
+                        .info {<br/>
+                        &nbsp;background-color: #008800;<br/>
+                        }
+                    </code> 
+                Which will cause the paragraphs with the class attribute of 'info' to have a green background.</li>
+            </ul>
+        <p>There are so many more options for styling the HTML elements of your web pages. For a full list of all CSS selectors, declarations and other features see: <a target="_blank" href="https://www.w3schools.com/css">www.w3schools.com/css</a></p>
+    </body>
+</html>

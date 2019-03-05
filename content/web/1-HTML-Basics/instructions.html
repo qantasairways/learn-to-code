@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>            
+        <link rel="stylesheet" href="/learn-to-code/content/theme.css">
+    </head>
+    <body>
+        <aside>Learn to Code - Web Edition</aside>
+        <h1>Code a Page - HTML</h1>
+        <p>Web pages are coded using HTML (Hypertext Markup Language). The codes consists of tags in angle brackets <code>&lt</code> <code>&gt</code>. Some tags can contain contents including further tags.
+            The HTML tags control how all web browsers draw your page.</p>
+        <p>A web page file usually starts with a <code>DOCTYPE</code> tag that lets the browser know the format of the rest of the file.</p>
+        <p>The rest of the page is then wrapped in a <code>&lthtml&gt</code> tag. Notice how the closing tag, at the bottom of the code, contains an extra <code>/</code> to indicate the end of it's counterpart above.</p>
+        <p>The 'tags' we code are interpreted by browsers to form HTML 'Elements' and generally two terms can be used interchangably.</p>
+        <p>Other HTML elements on this page include:</p>
+        <ul>
+            <li><code>&lthead&gt...&lt/head&gt</code> - This is a place where metadata about your page can be specified. Usually these tags are not rendered directly on your page.</li>
+            <li><code>&ltbody&gt...&lt/body&gt</code> - This is where you put the main content of the web page.</li>
+            <li><code>&lth1&gt<i>text</i>&lt/h1&gt</code> - A top level heading</li>
+            <li><code>&ltp&gt<i>text</i>&lt/p&gt</code> - Paragraphs</li>
+        </ul>
+        <p>Feel free to edit the code on the left and then click <code style="color: green; background-color: white; border: 1px solid green">Run the Code</code> above to see how your change affect the browser.
+                To get back to these instructions you can then click on <code style="color: maroon; background-color: white; border: 1px solid maroon">Stop the Code</code>. 
+                If your code is not correct the editor will give you warnings by showing a small symbol in the left margin. Hover over the symbol to get tips on what might be wrong.</p>
+        <h2>Try some other tags</h2>
+        <p>Here are some more to try:</p>
+        <ul>
+            <li><code>&ltb&gt<i>text</i>&lt/b&gt</code> - You can make things &ltb&gt<b>bold</b>&lt/b&gt by wrapping start and end tags around sections of text.</li>
+            <li><code>&lti&gt<i>text</i>&lt/i&gt</code> - This one works the same as bold only for &lti&gt<i>italics</i>&lt/i&gt.</li>
+            <li><code>&ltinput&gt</code> - This tag provides <input disabled="true" value="a text input box"> that you might use to later capture some information from the user of your page. Input tags do not need an ending tag.</li>
+            <li><code>&ltimg src=""&gt</code> - Images can be inserted into your page. Some tags need additional attributes set in order to work. For images the <code>src</code> attribute (aka source) needs a URL so that the browser know where to get the image from. 
+                You can get a URL for an image from the internet or here is one we have prepared for you. <code>&ltimg src="https://code.qantas.com/learn-to-code/images/cat.jpg"&gt</code></li>
+            <li><code>&lta href=""&gt<i>link text</i>&lt/a&gt</code> - The Anchor tag lets you create a link from your page to any other location on the internet by setting the attribute href (aka hypertext reference) to a URL. The content you put between the start and end tags becomes &lta href="https://en.wikipedia.org/wiki/Clickable"&gt<a target="_blank" href="https://en.wikipedia.org/wiki/Clickable">clickable</a>&lt/a&gt and the browser does the rest.
+        </ul>
+        <p>For a full list of all HTML element types and their attributes see: <a target="_blank" href="https://www.w3schools.com/html">www.w3schools.com/html</a></p>
+    </body>
+</html>

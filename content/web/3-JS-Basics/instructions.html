@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>            
+        <link rel="stylesheet" href="/learn-to-code/content/theme.css">
+    </head>
+    <body>
+        <aside>Learn to Code - Web Edition</aside>
+        <h1>Code for Real - JavasScript</h1>
+        <p>The languages we have looked at so far are great for defining elements of a web page and styling those elements. HTML and CSS are referred to as Domain Specific Languages in that they are great at specific jobs. The next language we will look at is JavaScript which is the main programming language of the web and can be considered a General Purpose language. JavaScript can be used to solve almost any computing requirement. JavaScript is also the most accessible programming language in the world because every browser can understand it and it's fun and easy to use too.</p>
+        <h2>Expressions</h2>
+        <p>Using the HTML <code>script</code> element we can add JavaScript to our pages. By placing it as the last item in our body our JavaScript code will run after the browser loads the main parts of the page.</p>
+        <p>In the example code <code>"Hello World"</code> is assigned to the value attribute of the <code>textarea</code> element using it's id as a reference. <i>NOTE: This short-cut doesn't work on all browsers but it let's us start off simple.</i></p>        
+        <h3>Maths Expressions</h3>
+        <p>You can replace the <code>"Hello World"</code> with <code>(4 + 7) / 2</code> and <code>Run the Code</code>. This is an expression just like in maths or what you might in an Excel formula.</p>
+        <table>
+            <tr><td>Math Operation</td><td>Example</td></tr>
+            <tr><td>Add</td><td>3 + 6</td></tr>
+            <tr><td>subract</td><td>8 - 5</td></tr>
+            <tr><td>Multiply</td><td>12 * 9</td></tr>
+            <tr><td>Divide</td><td>10 / 2</td></tr>
+            <tr><td>To the power of</td><td>4 ** 2</td></tr>
+            <tr><td>Remainder from</td><td>11 % 2</td></tr>
+            <tr><td>Brackets</td><td>((4 + 7) + 100 / 5) * 3</td></tr>
+            <tr><td>Square Root</td><td>Math.abs(-5)</td></tr>
+            <tr><td>Absolute Value</td><td>Math.sqrt(16)</td></tr>
+            <tr><td><i>etc...</i></td><td><i>See: <a target="_blank" href="https://www.w3schools.com/js/js_math.asp">www.w3schools.com/js/js_math</a></i></td></tr>
+        </table>
+        <h3>String Expressions</h3>
+        <p>Strings are text values and, like the <code>"Hello World"</code> example, they are usually defined by putting quotes around words. Text in quotes is not treated like code but more like a data value.</p>
+        <p>JavaScipt has a easy way to construct strings from other expressions using the back-tick character <code>`</code> usually found in the very top left of your keyboard.</p>
+        <p>Try this expression where the Hello World was...</p>
+        <code>`You are about ${21 * 365} days old.`</code>
+        <p>The <code>${...}</code> notation is computed as a separate expression and then inserted into the sentence.</p>
+        <p>There are many other ways to manipulate strings. For more infomation see: <a target="_blank" href="https://www.w3schools.com/js/js_strings.asp">www.w3schools.com/js/js_strings</a></p>
+        <h3>Boolean Expressions</h3>
+        <p>If you need your code to do different things depending on some input or parameter then we need to have a way of expressing logic. Logic operators results in a value that is <code>true</code> or <code>false</code>.</p>
+        <p>Try changing the expression after the equals again to:</p>
+        <code>4 &lt; 9</code>
+        <p>In this case the less than operator checks if 4 is less than 9 and returns a value of <code>true</code>. Other boolean opperations include:</p>
+        <table>
+            <tr><td>Boolean Operation</td><td>Example</td></tr>
+            <tr><td>Equals</td><td>5 == 3 + 2</td></tr>
+            <tr><td>Less Than</td><td>3 &lt; 6</td></tr>
+            <tr><td>Greater Than</td><td>8 &gt; 5</td></tr>
+            <tr><td>Less Than or Equal To</td><td>8 &lt;= 5</td></tr>
+            <tr><td>Greater Than or Equal To</td><td>5 &gt;= 5</td></tr>
+            <tr><td>Not (opposite)</td><td>!true</td></tr>
+            <tr><td>And (both conditions need to be true)</td><td>3 &lt; 7 && 5 == 3 + 2</td></tr>
+            <tr><td>Or (either condition need to be true)</td><td>3 &lt; 7 && 5 == 7</td></tr>
+        </table>
+        <h2>Variables</h2>
+        <p>Rather than just putting information on the page we can store results of expressions in memory so our page or app can use them later. We can give results a name by using the <code>let</code> key word followed by the assignment of an expression.</p>
+        <p>Try replacing the contents of the script tag with the following:</p>
+        <code style="display: block">
+                let a = 4<br/>
+                let b = 8<br/>
+                result.value = a * b
+        </code>
+        <h3>Data Types</h3>
+        <p>At this point we should look at data types. Up to now we have been working with strings, numbers and booleans but JavaScript supports other data types such as <code>arrays</code> (which are ordered lists of things) and more complex <code>objects</code> which we will look at in a later lesson.</p>
+        <p>To specify an array/list we can use square brackets to both define a list as well as get an item from the list by it's index number (position in the list):</p>
+        <code style="display: block">
+                let people = ["Tim", "Karen", "Simon", "Linda"]<br/>
+                result.value = people[2]
+        </code>
+        <p>You may have expected to see "Karen" as the result but indexes in JavaScript, and most other languages, start with zero for the first item, 1 for the second, etc..</p>
+        <h2>Conditions</h2>
+        <p>Conditions let you branch your code into to blocks where one gets used if the condition is true and the other one gets used if it's false. The basic <code>if...else</code> for example required a Boolean Expression (see above) and then has two blocks of code as follows:</p>
+        <code style="display: block">
+                let index = 0<br/>
+                let people = ["Tim", "Karen", "Simon", "Linda"]<br/>
+                if (people[index] == "Tim") {<br/> 
+                    &nbsp;&nbsp;result.value = "Hi Timbo. You are a special case."<br/>
+                } else {<br/>
+                    &nbsp;&nbsp;result.value = `Hello ${people[index]}`<br/>
+                }
+        </code>
+        <p>As you change the index variable you can see how the result is affected.</p>
+        <h2>Functions</h2>
+        <p>Functions in code are much like a function in maths, they take parameters and usually produce a result. There are many built-in functions available such as the Math functions we saw earlier an where functions are gouped together like that it's called a library or a library of functions.</p>
+        <p>It's easy to define your own functions by using the <code>function</code> keyword. Here is an example:</p>
+        <code style="display: block">
+                function greeting(name) {<br/>
+                    &nbsp;&nbsp;return `Hello ${name}`<br/> 
+                }<br/>
+                &nbsp;<br/>
+                let index = 3<br/>
+                let people = ["Tim", "Karen", "Simon", "Linda"]<br/>
+                result.value = greeting(people[index])<br/>
+        </code>
+        <p>The function definition consists of a name 'greeting' followed by brackets with the names of the parameters it is expecting to get when called. The body of the function is a code block in <code>{...}</code> curly brackets that is executed when the function is used. Functions have a special key word <code>return</code> that is used to sent the result back to the part of your code that made use of the function.</p>
+        <p>The last line here is takeing the name from the list and then uses the <code>greeting</code> function defined above to turn it into a message.</p>
+        <h2>Loops</h2>
+        <p>Computers are great at repeating tasks using loops. Looping over the items in a list is easy using the forEach method of a list.</p>
+        <code style="display: block">
+                function initials(name) {<br/>
+                    &nbsp;&nbsp;return name.substring(0, 1)<br/> 
+                }<br/>
+                &nbsp;<br/>
+                let people = ["Tim", "Karen", "Simon", "Linda"]<br/>
+                result.value = people.map(initials)<br/>
+        </code>
+        <p>As with other patterns of coding there are other ways of looping over areas of your code. See: <a target="_blank" href="https://www.w3schools.com/js/js_loop_for.asp">www.w3schools.com/js/js_loop_for</a></p>
+        <h2>Inline Functions (Closures)</h2>
+        <p>An function can be inserted into an expression rather than being defined with a name. These are also called anonymouse functions or closures and are very useful.</p>
+        <p>Here is the same result as the last example but using an in-line function rather than a named function:</p>
+        <code style="display: block">
+                let people = ["Tim", "Karen", "Simon", "Linda"]<br/>
+                result.value = people.map(function (person) {<br/>
+                    &nbsp;&nbsp;return person.substring(0, 1)<br/> 
+                })<br/>
+        </code>
+        <p>JavaScript has some short hand for defining a function that doesn't need us to use the code <code>function</code> any more. This is done by specifying the parameters to the function followed by <code>=&gt;</code> and then the expression to apply.</p>
+        <p>Also where there is only one parameter we don't need the brackets around the parameters. And if we code in an expression without a code block we don't need the special return key-word either. So the solution simplifies down to:</p>
+        <code style="display: block">
+            let people = ["Tim", "Karen", "Simon", "Linda"]<br/>
+            result.value = people.map(person => person.substring(0, 1))
+        </code>
+    </body>
+</html>

@@ -1,0 +1,29 @@
+{
+    "editions": [
+        {
+            "title": "Web Edition",
+            "lessons": [
+                {
+                    "title": "1 - Code a Page",
+                    "path": "web/1-HTML-Basics"
+                },
+                {
+                    "title": "2 - Code in Style",
+                    "path": "web/2-CSS-Basics"
+                },
+                {
+                    "title": "3 - Code for Real",
+                    "path": "web/3-JS-Basics"
+                },
+                {
+                    "title": "4 - Code some More",
+                    "path": "web/4-JS-More"
+                },
+                {
+                    "title": "5 - Code for Days",
+                    "path": "web/5-JS-Days"
+                }
+            ]
+        }
+    ]
+}
