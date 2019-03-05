@@ -2,7 +2,7 @@
 
 body {
  margin: 0 20px 20px 20px;
- font-size: 18px; 
+ font-size: 16px; 
 }
 
 aside {
@@ -22,10 +22,10 @@ h2 {
 }
 
 h3 {
-    font-size: 18px;
+    font-size: 16px;
 }
 input {
-    font-size: 18px;
+    font-size: 16px;
 }
 table, tr {
     border-collapse: collapse;
