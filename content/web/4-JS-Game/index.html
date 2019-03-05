@@ -15,18 +15,18 @@
             //Define variables
             let x = 1
 
-            //Get up the canvas
+            //Set up the canvas
             let canvasContext = arena.getContext("2d")
 
             //Define main loop function
             function loop() {
 
-                //Increment values
+                //Update values
                 x = x + 1
 
                 //Redraw the screen
                 canvasContext.clearRect(0, 0, arena.width, arena.height)
-                canvasContext.fillRect(x, 30, 20, 20)
+                canvasContext.fillRect(x, 30, 100, 100)
 
             }
 

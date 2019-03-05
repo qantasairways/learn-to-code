@@ -7,6 +7,100 @@
         <aside>Learn to Code - Web Edition</aside>
         <h1>Code a Game - JavasScript</h1>
         <p>Let's make a browser based game using the <code>canvas</code> HTML element. To get started here is the basic structure we need where the setInterval method let's us set how often our main loop should be executed. The value of 16 means every 16 milliseconds or about 60 frames a second which should make any animations look smooth.</p> 
-        <h2></h2>
+        <p>All it does so far is move a square across to the right forever.</p>
+        <h2>Full Screen</h2>
+        <p>Our canvas size defaults to quite a small area so let's make it fill the page using a combination of size and scale. Add a constant to our <code>Define Variables</code> section of code.</p>
+        <pre><code>
+const SCALE = 2
+        </code></pre>
+        <p>Add the following, to the top of the <code>Set up the canvas</code> section of code, to tell the canvas to stretch to the size and scale of the whole page:</p>
+        <pre><code>
+arena.width = window.innerWidth * SCALE
+arena.height = window.innerHeight * SCALE
+arena.style.width = `${window.innerWidth}px`
+arena.style.height = `${window.innerHeight}px`
+        </code></pre>
+        <p>There is a bit of white space between the edges of the page and the canvas but we can remove that using CSS.</p>   
+        <pre><code>
+body {
+    margin: 0;
+    overflow: hidden;
+}
+        </code></pre>   
+        <p>And now that our canvas is full screen we don't need a border anymore so we can set the border to 0:</p>          
+        <pre><code>
+canvas {
+    border: 0;
+}
+        </code></pre> 
+        <h2>Check for walls</h2>
+        <p>Let's make it so that if the box hits the right of the screen it bounces back. We can do this by:</p>
+        <ul>
+            <li>Adding a velocity variable to our variables and lets set it to 5 to speed things up a bit. <code>let xV = 5</code></li>
+            <li>Adding an <code>if</code> condition in our loop function. The <code>Updaste Values</code> section can change to:</li>
+        </ul>
+        <pre><code>
+//Update values
+x = x + xV
+if (x > arena.width) {
+    xV = -xV
+}
+        </code></pre>
+        <p>Now the box drops off the left of the screen so lest use the OR <code>||</code> Boolean operastor to extend out condition.</p>
+        <pre><code>
+//Update values
+x = x + xV
+if (x > arena.width || x < 0) {
+    xV = -xV
+}
+        </code></pre>
+        <h2>Boxes a boring</h2>
+        <p>Let's change our thing to an image by:</p>
+        <ul>
+            <li>Loading an image in our <code>Define Variables</code> section: 
+                <pre><code>
+let ball = new Image()
+ball.src = "https://code.qantas.com/learn-to-code/images/ball.png"
+                </code></pre></li>
+            <li>Drawing the image onto the canvas by replacing the <code>fillRect</code> line with:
+                <pre><code>
+canvasContext.drawImage(ball, x, 30, 100, 100)
+                </code></pre>
+                Where the parameters are drawImage(image, left, top, width, height)
+            </li>
+        </ul>
+        <p>You may notice that the ball still goes off the right hand side a bit before bouncing back. This is because the coordinate system of the canvas draws things from the top left corner which means we are checking if the top left corner of the image has reached the wall. We can fix this by subtracting the image width from the window width in our <code>if</code> condition:</p>
+        <pre><code>
+//Update values
+if (x > arena.width - 100 || x < 0) etc...
+        </code></pre>
+        <h2>Add some gravity</h2>
+        <p>In real life gravity is a constant force that applies a velocity of 9.8 meters per second. We can use a <code>const</code> to set that in our <code>Define Variables</code> section of code.</p>        
+        <pre><code>
+const GRAVITY = 9.8
+        </code></pre>
+        <p>To get things moving in an up and down way we need some more variables for vertial position <code>y</code> and vertical velocity <code>yV</code>. Let's add:</p>
+        <pre><code>
+let y = 30
+let yV = 0
+        </code></pre>
+        <p>Next we can add to out <code>Update values</code> section in our main loop to apply gravity and set the vertial position.</p>
+        <pre><code>
+yV = GRAVITY / 60  
+y = y + yV
+        </code></pre>
+        <p>NOTE: We need to divide gravity by 60 because our constant value is gravity's affect per second but we are updating our values about 60 times per second.</p>
+        <p>And finally update the drawImage code to use our new <code>y</code> variable.</p>
+        <pre><code>
+canvasContext.drawImage(ball, x, y, 100, 100)
+        </code></pre>
+        <h2>Bounce of the floor</h2>
+        <p>So our ball is now dropping through the floor but we can use the same technique as we did for the walls with an extra condition. After we update <code>y</code> add:</p>
+        <pre><code>
+if (y > arena.height - 100) {
+    yV = -yV
+}
+        </code></pre>   
+        <p>TBC</p>             
     </body>
 </html>
