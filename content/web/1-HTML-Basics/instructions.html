@@ -32,5 +32,12 @@
             <li><code>&lta href=""&gt<i>link text</i>&lt/a&gt</code> - The Anchor tag lets you create a link from your page to any other location on the internet by setting the attribute href (aka hypertext reference) to a URL. The content you put between the start and end tags becomes &lta href="https://en.wikipedia.org/wiki/Clickable"&gt<a target="_blank" href="https://en.wikipedia.org/wiki/Clickable">clickable</a>&lt/a&gt and the browser does the rest.
         </ul>
         <p>For a full list of all HTML element types and their attributes see: <a target="_blank" href="https://www.w3schools.com/html">www.w3schools.com/html</a></p>
+        <script>
+                let pos = localStorage.getItem(`scrollPos-${window.location.pathname}`)
+                document.documentElement.scrollTop = pos
+                window.addEventListener("scroll", (e) => {
+                    localStorage.setItem(`scrollPos-${window.location.pathname}`, document.documentElement.scrollTop)
+                })
+        </script>  
     </body>
 </html>

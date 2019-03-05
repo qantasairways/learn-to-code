@@ -8,5 +8,12 @@
         <p>Welcome to code.qantas.com - Learn to Code</p>
         <p>To get started select an edition and a lesson from the menu.</p>
         <p><i>NOTE: For best results use the Chrome browser.</i></p>
+        <script>
+                let pos = localStorage.getItem(`scrollPos-${window.location.pathname}`)
+                document.documentElement.scrollTop = pos
+                window.addEventListener("scroll", (e) => {
+                    localStorage.setItem(`scrollPos-${window.location.pathname}`, document.documentElement.scrollTop)
+                })
+        </script>  
     </body>
 </html>

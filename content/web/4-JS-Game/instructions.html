@@ -101,6 +101,13 @@ if (y > arena.height - 100) {
     yV = -yV
 }
         </code></pre>   
-        <p>TBC</p>             
+        <p>TBC</p>  
+        <script>
+            let pos = localStorage.getItem(`scrollPos-${window.location.pathname}`)
+            document.documentElement.scrollTop = pos
+            window.addEventListener("scroll", (e) => {
+                localStorage.setItem(`scrollPos-${window.location.pathname}`, document.documentElement.scrollTop)
+            })
+        </script>           
     </body>
 </html>

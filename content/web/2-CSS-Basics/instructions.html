@@ -46,5 +46,12 @@
                 Which will cause the paragraphs with the class attribute of 'info' to have a green background.</li>
             </ul>
         <p>There are so many more options for styling the HTML elements of your web pages. For a full list of all CSS selectors, declarations and other features see: <a target="_blank" href="https://www.w3schools.com/css">www.w3schools.com/css</a></p>
+        <script>
+                let pos = localStorage.getItem(`scrollPos-${window.location.pathname}`)
+                document.documentElement.scrollTop = pos
+                window.addEventListener("scroll", (e) => {
+                    localStorage.setItem(`scrollPos-${window.location.pathname}`, document.documentElement.scrollTop)
+                })
+        </script>  
     </body>
 </html>

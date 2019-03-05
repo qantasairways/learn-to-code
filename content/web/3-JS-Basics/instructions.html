@@ -116,5 +116,12 @@ let people = ["Tim", "Karen", "Simon", "Linda"]
 result.value = people.map(person => person.substring(0, 1))
         </code></pre>
         <p>Nice!</p>
+        <script>
+                let pos = localStorage.getItem(`scrollPos-${window.location.pathname}`)
+                document.documentElement.scrollTop = pos
+                window.addEventListener("scroll", (e) => {
+                    localStorage.setItem(`scrollPos-${window.location.pathname}`, document.documentElement.scrollTop)
+                })
+        </script>  
     </body>
 </html>

@@ -7,5 +7,12 @@
         <aside>Learn to Code - Web Edition</aside>
         <h1>Code for Days - JavasScript</h1>
         <p>TBC</p>
+        <script>
+            let pos = localStorage.getItem(`scrollPos-${window.location.pathname}`)
+            document.documentElement.scrollTop = pos
+            window.addEventListener("scroll", (e) => {
+                localStorage.setItem(`scrollPos-${window.location.pathname}`, document.documentElement.scrollTop)
+            })
+        </script>    
     </body>
 </html>
