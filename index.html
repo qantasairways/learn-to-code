@@ -220,9 +220,12 @@
             }
             function execute() {
                 let editorCode = editor.getValue()
-                let scripts = /(.*\<body\>)(.*)/gi
+                let bodyPos = editorCode.indexOf('\<body')
+                let bodyPlus = editorCode.substring(bodyPos + 5)
+                let scriptPos = bodyPlus.indexOf('\>')
+                let totalPos = bodyPos + 5 + scriptPos + 1
                 let tag = "\<script\>let errors = 0;window.onerror = function (msg, url, lineNo, columnNo, error) { if (errors === 0) {document.body.innerHTML = \"\"}; errors++; document.body.innerHTML += '\<div id=\"errors\" style=\"background-color: #880000; color: #ffffff; padding: 20px; font-size: 18px;\"\>' + msg + '\<br/\>Line number: ' + lineNo + '\</div\>'; return false; }\</script\>"
-                editorCode = editorCode.replace(scripts, `$1 ${tag} $2`)
+                editorCode = editorCode.substring(0, totalPos) + tag + editorCode.substring(totalPos, editorCode.length)
                 let output = document.getElementById('output')
                 output.src = "data:text/html;charset=utf-8," + escape(editorCode)
                 document.getElementById('run').style.display = "none"
