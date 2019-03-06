@@ -50,13 +50,16 @@
             <tr><td>Or (either condition need to be true)</td><td>3 &lt; 7 && 5 == 7</td></tr>
         </table>
         <h2>Variables</h2>
-        <p>Rather than just putting information on the page we can store results of expressions in memory so our page or app can use them later. We can give results a name by using the <code>let</code> key word followed by the assignment of an expression.</p>
-        <p>Try replacing the expression code with the following:</p>
+        <p>Rather than just putting information on the page we can store results of expressions in memory so our page or app can use them later. We are already doing this for our result value which is stored in memory and then referenced in the <code>//Show result</code> section of code to display it on our web page. 
+            We can asign values to a name by using the <code>let</code> key word followed by the name to use and an expression. These named reference are commonly called variables because while their reference name is consistant the value they hold can be changed.</p>
+        <p>Try replacing the <code>Evaluate expression</code> section of code with the following:</p>
         <pre><code>
 let a = 4
 let b = 8
+a = 12
 let result = a * b
         </code></pre>
+        <p>This defines <code>a</code> and sets it's value to 4, then defines <code>b</code> and sets it's value to 8. After that <code>a</code> is updated to now be 12 and then finally we use those variable names in our expression just like we would with normal values.</p>
         <h3>Data Types</h3>
         <p>At this point we should look at data types. Up to now we have been working with strings, numbers and Booleans but JavaScript supports other data types such as <code>arrays</code> (which are ordered lists of things) and more complex <code>objects</code> which we will look at in a later lesson.</p>
         <p>To specify an array/list we can use square brackets to both define a list as well as get an item from the list by it's index number (position in the list):</p>
