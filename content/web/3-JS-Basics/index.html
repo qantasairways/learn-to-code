@@ -2,21 +2,23 @@
 <html>
     <head>
         <style>
-            #result {
+            #info {
                 font-size: 50px;
                 color: #0000FF;
-                width: 100%;
             }
         </style>
     </head>
     <body>
         <h1>Result is...</h1>
-        <p id="result"></p>
+        <p id="info"></p>
         
         <script>
         
-            let resultElement = document.getElementById("result")
-            resultElement.innerHTML = "Hello World"
+            //Evaluate expression
+            let result = "Hello World"
+        
+            //Show result
+            document.getElementById("info").innerHTML = result
             
         </script>
 

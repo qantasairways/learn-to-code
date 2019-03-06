@@ -51,35 +51,30 @@
         </table>
         <h2>Variables</h2>
         <p>Rather than just putting information on the page we can store results of expressions in memory so our page or app can use them later. We can give results a name by using the <code>let</code> key word followed by the assignment of an expression.</p>
-        <p>Try replacing the script tag with the following:</p>
+        <p>Try replacing the expression code with the following:</p>
         <pre><code>
-let resultElement = document.getElementById("result")
-
 let a = 4
 let b = 8
-resultElement.innerHTML = a * b
+let result = a * b
         </code></pre>
         <h3>Data Types</h3>
         <p>At this point we should look at data types. Up to now we have been working with strings, numbers and Booleans but JavaScript supports other data types such as <code>arrays</code> (which are ordered lists of things) and more complex <code>objects</code> which we will look at in a later lesson.</p>
         <p>To specify an array/list we can use square brackets to both define a list as well as get an item from the list by it's index number (position in the list):</p>
         <pre><code>
-let resultElement = document.getElementById("result")
-
 let people = ["Tim", "Karen", "Simon", "Linda"]
-resultElement.innerHTML = people[2]
+let result = people[2]
         </code></pre>
         <p>You may have expected to see "Karen" as the result but indexes in JavaScript, and most other languages, start with zero for the first item, 1 for the second, etc..</p>
         <h2>Conditions</h2>
         <p>Conditions let you branch your code into to blocks where one gets used if the condition is true and the other one gets used if it's false. The basic <code>if...else</code> for example required a Boolean Expression (see above) and then has two blocks of code as follows:</p>
         <pre><code>
-let resultElement = document.getElementById("result")
-
 let index = 0
+let result = ""
 let people = ["Tim", "Karen", "Simon", "Linda"]
 if (people[index] == "Tim") {
-    resultElement.innerHTML = "Hi Timbo. You are a special case."
+    result = "Hi Timbo. You are a special case."
 } else {
-    resultElement.innerHTML = `Hello ${people[index]}`
+    result = `Hello ${people[index]}`
 }
         </code></pre>
         <p>As you change the index variable you can see how the result is affected.</p>
@@ -87,49 +82,42 @@ if (people[index] == "Tim") {
         <p>Functions in code are much like a function in maths, they take parameters and usually produce a result. There are many built-in functions available such as the Math functions we saw earlier an where functions are grouped together like that it's called a library or a library of functions.</p>
         <p>It's easy to define your own functions by using the <code>function</code> keyword. Here is an example:</p>
         <pre><code>
-let resultElement = document.getElementById("result")
-
 function greeting(name) {
     return `Hello ${name}`
 }
 
 let index = 3
 let people = ["Tim", "Karen", "Simon", "Linda"]
-resultElement.innerHTML = greeting(people[index])
+let result = greeting(people[index])
         </code></pre>
         <p>The function definition consists of a name 'greeting' followed by brackets with the names of the parameters it is expecting to get when called. The body of the function is a code block in <code>{...}</code> curly brackets that is executed when the function is used. Functions have a special key word <code>return</code> that is used to sent the result back to the part of your code that made use of the function.</p>
         <p>The last line here uses the name from the list and then calls the <code>greeting</code> function to turn it into a message.</p>
         <h2>Loops</h2>
         <p>Computers are great at repeating tasks using loops. Looping over the items in a list is easy using the <code>map</code> method of a list. The <code>map</code> method takes a function as a parameter and applies it to each item in the list. The output is a new list containing each value generated from the supplied function.</p>
         <pre><code>
-let resultElement = document.getElementById("result")
-
 function initials(name) {
+    //Extract the first character from the name
     return name.substring(0, 1)
 }
 
 let people = ["Tim", "Karen", "Simon", "Linda"]
-resultElement.innerHTML = people.map(initials)
+let result = people.map(initials)
         </code></pre>
         <p>As with other patterns of coding there are other ways of looping over areas of your code. See: <a target="_blank" href="https://www.w3schools.com/js/js_loop_for.asp">www.w3schools.com/js/js_loop_for</a></p>
         <h2>Inline Functions (Closures)</h2>
         <p>An function can be inserted into an expression rather than being defined with a name. These are also called anonymous functions (as they have no name) or closures and are very useful.</p>
         <p>Here is the same result as the last example but using an in-line function rather than a named function:</p>
         <pre><code>
-let resultElement = document.getElementById("result")
-
 let people = ["Tim", "Karen", "Simon", "Linda"]
-resultElement.innerHTML = people.map(function (person) {
+let result = people.map(function (person) {
     return person.substring(0, 1)
 })
         </code></pre>
         <p>JavaScript has some short hand for defining a function that doesn't need us to use the code <code>function</code> any more. This is done by specifying the parameters to the function followed by <code>=&gt;</code> and then the expression to apply.</p>
         <p>Also where there is only one parameter we don't need the brackets around the parameters. And if we code in an expression without a code block we don't need the special return key-word either. So the solution simplifies down to:</p>
         <pre><code>
-let resultElement = document.getElementById("result")
-
 let people = ["Tim", "Karen", "Simon", "Linda"]
-resultElement.innerHTML = people.map(person => person.substring(0, 1))
+let result = people.map(person => person.substring(0, 1))
         </code></pre>
         <p>Nice!</p>
         <script>
