@@ -16,12 +16,12 @@
                     "path": "web/3-JS-Basics"
                 },
                 {
-                    "title": "4 - Code a Game",
-                    "path": "web/4-JS-Game"
+                    "title": "4 - Code a Game - Part 1",
+                    "path": "web/4-JS-Game-P1"
                 },
                 {
-                    "title": "5 - Code for Days",
-                    "path": "web/5-JS-Days"
+                    "title": "5 - Code a Game - Part 2",
+                    "path": "web/5-JS-Game-P2"
                 }
             ]
         }

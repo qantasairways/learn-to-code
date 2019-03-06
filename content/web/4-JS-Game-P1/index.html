@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Dodgeball</title>
+        <style>
+            canvas {
+                border: 1px solid grey;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="arena"></canvas>
+        <script>
+            
+            //Define constants
+            const FRAMERATE = 60
+            const BALLSIZE = 100
+
+            //Set up canvas
+            let canvas = document.getElementById("arena")
+            let canvasContext = canvas.getContext("2d")
+
+            //Define variables
+            let ball = {x: 1}
+
+            //Define main loop function
+            function loop() {
+
+                //Update values
+                ball.x = ball.x + 1
+
+                //Redraw the screen
+                canvasContext.clearRect(0, 0, canvas.width, canvas.height)
+                canvasContext.fillRect(ball.x, 30, BALLSIZE, BALLSIZE) //Parameters are(left, top, width, height)
+
+            }
+
+            //Start main loop
+            setInterval(loop, 1000 / FRAMERATE)
+
+        </script>
+    </body>
+</html>

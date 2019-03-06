@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Dodgeball</title>
+        <style>
+            canvas {
+                border: 0;
+            }
+            body {
+                margin: 0;
+                overflow: hidden;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="arena"></canvas>
+        <script>
+            
+            //Define constants
+            const TOTALBALLS = 10
+            const FRAMERATE = 60
+            const SCALE = 2
+            const GRAVITY = 9.8
+            const MOMENTUM = 0.96
+            const BALLSIZE = 100
+
+            //Set up canvas
+            let canvas = document.getElementById("arena")
+            let canvasContext = canvas.getContext("2d")
+            canvas.width = window.innerWidth * SCALE
+            canvas.height = window.innerHeight * SCALE
+            canvas.style.width = `${window.innerWidth}px`
+            canvas.style.height = `${window.innerHeight}px`
+
+            //Define variables
+            let balls = []
+            for(let i = 0; i < TOTALBALLS; i++) {
+                
+                balls.push({
+                    x: Math.random() * (canvas.width - BALLSIZE), 
+                    xV: Math.random() * 30 - 15, 
+                    y: Math.random() * (canvas.height / 3),
+                    yV: Math.random() * 30 - 15
+                })
+                
+            }
+            
+            let ballImage = new Image()
+            ballImage.src = "https://code.qantas.com/learn-to-code/images/ball.png"
+
+            //Define main loop function
+            function loop() {
+
+                //Update values
+                balls.forEach(ball => {
+                    
+                    //Apply gravity
+                    ball.yV = ball.yV + GRAVITY / FRAMERATE
+    
+                    //Bounce off walls
+                    if (ball.x > canvas.width - BALLSIZE) {
+                        ball.x = canvas.width - BALLSIZE
+                        ball.xV = -ball.xV 
+                    }
+                    if (ball.x < 0) {
+                        ball.x = 0
+                        ball.xV = -ball.xV
+                    }
+                    
+                    //Bounce of floor
+                    if (ball.y > canvas.height - BALLSIZE) {
+                        ball.y = canvas.height - BALLSIZE
+                        ball.yV = -ball.yV * MOMENTUM
+                    }
+
+                    //Update ball positions
+                    ball.x = ball.x + ball.xV
+                    ball.y = ball.y + ball.yV
+                    
+                })
+
+                //Redraw the screen
+                canvasContext.clearRect(0, 0, canvas.width, canvas.height)
+                
+                balls.forEach(ball => {
+                    canvasContext.drawImage(ballImage, ball.x, ball.y, BALLSIZE, BALLSIZE)
+                })
+
+            }
+
+            //Start main loop
+            setInterval(loop, 1000 / FRAMERATE)
+
+        </script>
+    </body>
+</html>

@@ -58,3 +58,6 @@ pre {
 pre>code {
     color: #000000;
 }
+pre>code i {
+    color: #666666;
+}

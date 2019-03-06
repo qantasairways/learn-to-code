@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>            
+        <link rel="stylesheet" href="/learn-to-code/content/theme.css">
+    </head>
+    <body>
+        <aside>Learn to Code - Web Edition: JavaScript</aside>
+        <h1>Code a Game - Part 2</h1>
+        <p>In Part 1 we built out all the code to get balls bouncing around the screen but it's not really a game until we add a protagonist.</p>
+        <p>We can start with some new constants:</p>
+        <pre><code>
+const PERSONSIZE = 160
+const PERSONSPEED = 2
+        </code></pre>   
+        <p> It's time to define some more variable that will hold the state of our <code>person</code>, the hirozontal position of the mouse and another image.</p>
+        <pre><code>
+let person = {
+    x: canvas.width / 2,
+    y: canvas.height / 2,
+    xV: 0,
+    yV: 0
+}
+let mouseX = 0
+
+let personImage = new Image()
+personImage.src = "https://code.qantas.com/learn-to-code/images/emoji.png"
+        </code></pre>
+        <p>And in the <code>Draw the screen</code> section lets draw the person.</p>
+        <pre><code>
+canvasContext.drawImage(personImage, person.x, person.y, PERSONSIZE, PERSONSIZE)
+        </code></pre>
+        <p>Well so far so good but we need to allow the person to be controled. We need a new section in our code to <code>Bind events</code>. This means that we can register with the browser to let us know when particular events occure. In this case we are going to listen for <code>mousemove</code> events over the canvas area and capture the mouse position. From those values we can move our person in the direction of the mouse (this works the same for touch pads).
+        Every time the mouse moves the browser will call our function which updates the current mouse position in <code>mouseX</code>.</p>
+        <pre><code>
+//Bind events
+canvas.addEventListener('mousemove', event => {
+    mouseX = event.offsetX * SCALE
+})
+        </code></pre>
+        <p>Now that we are maintaining the position of the mouse we can check if we need to move the person left, right or stay still. The following needs to be added to our main loop but not inside the forEach loop.</p>
+        <pre><code>
+//Update the person
+if (mouseX < person.x) {
+    person.xV = -PERSONSPEED
+} else if (mouseX > person.x + PERSONSIZE) {
+    person.xV = PERSONSPEED
+} else {
+    person.xV = 0
+}
+person.x = person.x + person.xV
+        </code></pre>
+        <p>And finally we need to check if there is a collision (anyone remember Pythagoras' Theorem?) and update a scoreboard. 
+            As our code loops through we could imagine a right angle triange being drawn between each ball position and the person position like this.</p>
+            <svg width="536px" height="252px" viewBox="0 0 536 252" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+                <title>collision</title>
+                <desc>Created with Sketch.</desc>
+                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <circle id="Oval" fill="#F0B90B" cx="202" cy="222" r="30"></circle>
+                    <circle id="Oval" fill="#E23939" cx="70" cy="53" r="19"></circle>
+                    <circle id="Oval" fill="#F0B90B" cx="482.5" cy="158.5" r="45.5"></circle>
+                    <circle id="Oval" fill="#E23939" cx="434" cy="110" r="23"></circle>
+                    <polygon id="Path" stroke="#2D2D2D" points="70 53 202 222 70 222"></polygon>
+                    <text id="a-=-person.y---ball." transform="translate(51.000000, 148.000000) rotate(-90.000000) translate(-51.000000, -148.000000) " font-family="Helvetica" font-size="12" font-weight="normal" fill="#000000">
+                        <tspan x="-2" y="152">a = person.y - ball.y</tspan>
+                    </text>
+                    <text id="b-=-person.x---ball." font-family="Helvetica" font-size="12" font-weight="normal" fill="#000000">
+                        <tspan x="70" y="249">b = person.x - ball.x</tspan>
+                    </text>
+                    <text id="A" font-family="Helvetica" font-size="28" font-weight="normal" fill="#000000">
+                        <tspan x="0" y="28">A</tspan>
+                    </text>
+                    <text id="B" font-family="Helvetica" font-size="28" font-weight="normal" fill="#000000">
+                        <tspan x="310" y="28">B</tspan>
+                    </text>
+                    <text id="If-distance-is-less" font-family="Helvetica" font-size="12" font-weight="normal" fill="#000000">
+                        <tspan x="361" y="57">If distance is less than...</tspan>
+                    </text>
+                    <text id="…then-it’s-a-hit." font-family="Helvetica" font-size="12" font-weight="normal" fill="#000000">
+                        <tspan x="393" y="242">...then it's a hit.</tspan>
+                    </text>
+                    <text id="BALLSIZE-/-2" font-family="Helvetica" font-size="12" font-weight="normal" fill="#000000">
+                        <tspan x="463" y="107">BALLSIZE / 2</tspan>
+                    </text>
+                    <text id="+-PERSONSIZE-/-2" font-family="Helvetica" font-size="12" font-weight="normal" fill="#000000">
+                        <tspan x="329" y="158">+ PERSONSIZE / 2</tspan>
+                    </text>
+                    <text id="distance-=-sqrt(a-+" transform="translate(147.805703, 121.926060) rotate(53.000000) translate(-147.805703, -121.926060) " font-family="Helvetica" font-size="12" font-weight="normal" fill="#000000">
+                        <tspan x="84.3057025" y="125.92606">distance = sqrt(a</tspan>
+                        <tspan x="173.350624" y="125.92606"> </tspan>
+                        <tspan x="176.684609" y="125.92606">  &nbsp;+ b  </tspan>
+                        <tspan x="207.036171" y="125.92606">)</tspan>
+                    </text>
+                    <text id="2-2" transform="translate(176.821304, 153.789509) rotate(53.000000) translate(-176.821304, -153.789509) " font-family="Helvetica" font-size="12" font-weight="normal" fill="#000000">
+                        <tspan x="159.821304" y="157.789509">2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2</tspan>
+                    </text>
+                    <path d="M434,110 L482.5,158.5" id="Path-2" stroke="#000000"></path>
+                </g>
+            </svg>
+
+
+        <script>
+            let pos = localStorage.getItem(`scrollPos-${window.location.pathname}`)
+            document.documentElement.scrollTop = pos
+            window.addEventListener("scroll", (e) => {
+                localStorage.setItem(`scrollPos-${window.location.pathname}`, document.documentElement.scrollTop)
+            })
+        </script>    
+    </body>
+</html>
