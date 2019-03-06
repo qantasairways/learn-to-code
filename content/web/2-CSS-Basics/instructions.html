@@ -6,12 +6,14 @@
     <body>
         <aside>Learn to Code - Web Edition</aside>
         <h1>Code in Style - CSS</h1>
-        <p>You can code styling into your web page using a language called CSS (Cascading Style Sheets). These style codes are applied using the <code>&ltstyle&gt<i>css codes</i>&lt/style&gt</code> HTML tag.</p>
+        <p>You can apply styling to your web page using a language called CSS (Cascading Style Sheets). These style codes are applied using the <code>&ltstyle&gt<i>css codes</i>&lt/style&gt</code> HTML tag.</p>
         <h2>Selectors and Declarations</h2>
-        <p>Each section of CSS code consists of a selector followed by a number of declarations grouped by a pair of braces (curly brackets).</p>
+        <p>Each section of CSS code consists of a selector followed by a number of declarations grouped inside a pair of braces (curly brackets).</p>
         <p>In the code on the left the selector is the <code>h1</code> and the declarations are:</p>
-        <code>color: #8800ff;</code><br/>
-        <code>font-size: 30px;</code>
+        <pre><code>
+color: #8800ff;
+font-size: 30px;
+        </code></pre>
         <p>A selector is used to specify which HTML elements on your page should be styled using the declarations that follow. 
         In this case the selector <code>h1</code> tells the browser to apply two style declarations to all level 1 headings on the page.</p>
         <p>Declarations consists two parts <code><i>property</i></code>: <code><i>value</i></code>; and in this example they specify the following browser behaviours:</p>
@@ -22,7 +24,7 @@
                 So #<span style="color: red;">88</span><span style="color: green;">00</span><span style="color: blue;">FF</span>; means about half the amount of possible red, no green at all and full blue.
                 Try changing the digits in the 'color' declaration and <code>Run the Code</code> to see how it affects the heading.
             </li>
-            <li><code>font-size: 30px</code> - This sets the size of the font for the selected elements on the page. In this case the units of measurement are pixels (px).</li>
+            <li><code>font-size: 30px</code> - This sets the size of the font for the selected elements on the page. In this case the unit of measurement is pixels (px).</li>
         </ul>
         <h2>Other types of Selectors</h2>
         <ul>
@@ -34,10 +36,10 @@
     float: right;
 }
                 </code></pre>
-                Which will cause the image with an id attribute of 'cat' to have rounded corners with a radius of 40 pixels and have it 'float' over to the right of the page allowing the paragraphs of text to move up and fix next to the image.
+                Which will cause the image with an id attribute of 'cat' to have rounded corners with a radius of 40 pixels and have it 'float' over to the right of the page allowing the paragraphs of text to move up and fit next to the image.
             </li>
             <li><code>.<i>class</i></code> - If you have elements of the same type, such as paragraphs, but you only want to style specific ones then you can assign classes to your HTML and then select all elements with that class name by using a dot 
-                <code>.</code>. For example:
+                <code>.</code> prefix. For example:
                 <pre><code>
 .info {
     background-color: #008800;
