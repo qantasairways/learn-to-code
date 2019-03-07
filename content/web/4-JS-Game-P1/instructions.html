@@ -121,7 +121,7 @@ if (ball.x < 0) {
 }
 <i>ball.x = ball.x + ball.xV</i>
         </code></pre>
-        <p><i>NOTE: You can see the same <code>ball.xV = -ball.xV</code> expression being used here. This still works because id <code>xV</code> is -10 then the expression resolves to <code>ball.xV = -(-10)</code> and because a negative of a negative is a positive our box will start heading to the right again.</i></p>
+        <p><i>NOTE: You can see the same <code>ball.xV = -ball.xV</code> expression being used here. This still works because if <code>xV</code> is -10 then the expression resolves to <code>ball.xV = -(-10)</code> and because a negative of a negative is a positive our box will start heading to the right again.</i></p>
         <h2>Boxes are boring</h2>
         <p>Let's draw an image rather than a box by:</p>
         <ul>
@@ -155,7 +155,7 @@ const MOMENTUM = 0.98
         <pre><code>
 <i>let ball = {x: 1, xV: 5</i>, y: 30, yV: 0<i>}</i>
         </code></pre>
-        <p>Next we can add the top of our <code>Update values</code> section in our main loop to apply the gravity to the vertical position of the ball.</p>
+        <p>Next we can add to the top of our <code>Update values</code> section in our main loop to apply the gravity to the vertical velocity of the ball.</p>
         <pre><code>
 ball.yV = ball.yV + GRAVITY / FRAMERATE  
         </code></pre>
@@ -177,7 +177,7 @@ if (ball.y > canvas.height - BALLSIZE) {
 }
         </code></pre>   
         <h2>Add a background</h2>
-        <p>Everyone knows dodgeball is played in gyms so let's add a background. We can do this by jumping back to our CSS. A new declaration in in the body selector will let us set a background image for the whole page.</p>
+        <p>Everyone knows dodgeball is played in gyms so let's add a background. We can do this by jumping back to our CSS. Some new declarations in the body selector will let us set a background image for the whole page.</p>
         <pre><code>
 <i>body {
     margin: 0;
@@ -215,12 +215,12 @@ const TOTALBALLS = 2
 let balls = []
 for(let i = 0; i < TOTALBALLS; i++) {
 
-    <i>balls.push({
+    balls.push(<i>{
         x: Math.random() * (canvas.width - BALLSIZE), 
         xV: Math.random() * 30 - 15, 
         y: Math.random() * (canvas.height / 3), 
         yV: Math.random() * 30 - 15 
-    })</i>
+    }</i>)
 
 }                
                 </code></pre>                   
