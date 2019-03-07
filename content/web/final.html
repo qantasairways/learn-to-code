@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Dodgeball</title>
+        <style>
+            canvas {
+                border: 0;
+            }
+            body {
+                margin: 0;
+                overflow: hidden;
+                background-image: url("https://code.qantas.com/learn-to-code/images/gym.png");
+                background-size: cover;
+            }
+            #scoreboard {
+                background-color:rgba(0, 0, 0, 0.3);
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                width: 400px;
+                height: 30px;
+                border-radius: 12px;
+                font-family: helvetica;
+                font-size: 28px;
+                padding: 20px;
+                color: #880000;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="arena"></canvas>
+        <div id="scoreboard"></div>
+        <script>
+            
+            //Define constants
+            const TOTALBALLS = 5
+            const FRAMERATE = 50
+            const SCALE = 2
+            const GRAVITY = 9.8
+            const MOMENTUM = 0.96
+            const BALLSIZE = 100
+            const PERSONSIZE = 160
+            const PERSONSPEED = 10
+            const STOPGAP = 5
+
+            //Set up canvas
+            let canvas = document.getElementById("arena")
+            let canvasContext = canvas.getContext("2d")
+            canvas.width = window.innerWidth * SCALE
+            canvas.height = window.innerHeight * SCALE
+            canvas.style.width = `${window.innerWidth}px`
+            canvas.style.height = `${window.innerHeight}px`
+
+            //Define variables
+            let balls = []
+            for(let i = 0; i < TOTALBALLS; i++) {
+                
+                balls.push({
+                    x: Math.random() * (canvas.width - BALLSIZE), 
+                    xV: Math.random() * 30 - 15, 
+                    y: Math.random() * (canvas.height / 3),
+                    yV: Math.random() * 30 - 15
+                })
+                
+            }
+            let person = {
+                x: canvas.width / 2,
+                y: canvas.height / 2,
+                xV: 0
+            }
+            let mouseX = 0
+            let hits = 0
+            let scoreboard = document.getElementById("scoreboard")
+            let start = Date.now()
+
+            let personImage = new Image()
+            personImage.src = "https://code.qantas.com/learn-to-code/images/emoji.png"
+
+            let ballImage = new Image()
+            ballImage.src = "https://code.qantas.com/learn-to-code/images/ball.png"
+            
+            //Bind events
+            canvas.addEventListener('mousemove', event => {
+                mouseX = event.offsetX * SCALE
+            })
+            
+            //Define main loop function
+            function loop() {
+
+                //Update the person
+                if (mouseX + STOPGAP < person.x + PERSONSIZE / 2) {
+                    person.xV = -PERSONSPEED
+                } else if (mouseX - STOPGAP > person.x + PERSONSIZE / 2) {
+                    person.xV = PERSONSPEED
+                } else {
+                    person.xV = 0
+                }
+                person.x = person.x + person.xV
+
+                //Update the balls
+                balls.forEach(ball => {
+                    
+                    //Apply gravity
+                    ball.yV = ball.yV + GRAVITY / FRAMERATE
+    
+                    //Bounce off walls
+                    if (ball.x > canvas.width - BALLSIZE) {
+                        ball.x = canvas.width - BALLSIZE
+                        ball.xV = -ball.xV 
+                    }
+                    if (ball.x < 0) {
+                        ball.x = 0
+                        ball.xV = -ball.xV
+                    }
+                    
+                    //Bounce of floor
+                    if (ball.y > canvas.height - BALLSIZE) {
+                        ball.y = canvas.height - BALLSIZE
+                        ball.yV = -ball.yV * MOMENTUM
+                    }
+
+                    //Update ball positions
+                    ball.x = ball.x + ball.xV
+                    ball.y = ball.y + ball.yV
+                    
+                    //Get the coordinates of the centers of the target objects
+                    let personCenterX = person.x + PERSONSIZE / 2
+                    let personCenterY = person.y + PERSONSIZE / 2
+                    let ballCenterX = ball.x + BALLSIZE / 2
+                    let ballCenterY = ball.y + BALLSIZE / 2
+                    
+                    //Calculate the distance between the objects
+                    let offsetX = personCenterX - ballCenterX
+                    let offsetY = personCenterY - ballCenterY
+                    
+                    //Apply Pythagoras' Theorem
+                    let distance = Math.sqrt(offsetX * offsetX + offsetY * offsetY)
+                    
+                    //Calculate mimimum distance
+                    let minDistance = PERSONSIZE / 2 + BALLSIZE / 2
+                    
+                    //Check distance
+                    if (distance <= minDistance) {
+                        hits = hits + 1
+                    }
+
+                    //Update scoreboard
+                    let seconds = Math.round((Date.now() - start) / 1000)
+                    scoreboard.innerHTML = `${seconds} Seconds - ${hits} Hits = ${seconds - hits}`
+                    if (seconds - hits < 0) {
+                        clearInterval(run)
+                        scoreboard.innerHTML = "GAME OVER!"
+                    }                  
+
+                })
+
+                //Redraw the screen
+                canvasContext.clearRect(0, 0, canvas.width, canvas.height)
+                
+                balls.forEach(ball => {
+                    canvasContext.drawImage(ballImage, ball.x, ball.y, BALLSIZE, BALLSIZE)
+                })
+                
+                canvasContext.drawImage(personImage, person.x, person.y, PERSONSIZE, PERSONSIZE)
+
+            }
+
+            //Start main loop
+            let run = setInterval(loop, 1000 / FRAMERATE)
+
+        </script>
+    </body>
+</html>

@@ -6,14 +6,64 @@
     <body>
         <aside>Learn to Code - Web Edition: JavaScript</aside>
         <h1>Code a Game - Part 1</h1>
-        <p>Let's make a browser based game using the <code>canvas</code> HTML element. 
-            On the left is the basic structure we need to get started where the setInterval method at the bottom lets us set how often our main loop should be executed in milliseconds. 
+        <p>Let's make a browser based game using the <code>canvas</code> HTML element.</p> 
+        <p>On the left is the basic structure we need to get started where the setInterval method at the bottom lets us set how often our main loop should be executed in milliseconds. 
             There are 1000 milliseconds in a second so we can divide 1000 by the framerate constant to get a nice smooth 60 frames a second..</p> 
-            <p><i>NOTE: A constant <code>const</code> can be used like other variables except you can assign a new value to them so their value is constant.</i></p>
-        <p>All the code does so far is move a square across to the right forever.</p>
-        <p><i>NOTE: Have you noticed the lines that start with <code>//something...</code></i>? These are called comments and they are very useful for making notes in your code to remind yourself of how or why things are there. They are completely ignored by the JavaScript interpreter so use them as much as you need.</p>
-        <h2>Full Screen</h2>
-        <p>The <code>canvas</code> element defaults size is quite small so let's make it fill the page using a combination of size and scale. 
+        <p>On line 20 we get a reference to the canvas element defined in the HTTML above. After that we use the canvas method <code>getContext</code>. This returns a graphics context that will let us draw things on our web page.</p>
+        <p>One line 24 we define a ball variable and assign an object with one attribute called <code>x</code> and an initial value of 1.</p>
+        <p>If you run this all it does so far is move a square across to the right forever.</p>
+        <div class="panel">
+            <aside><i>i</i> - JavaScript Objects</aside>
+            <p>You could think of objects as containers that can hold named items including numbers, strings, lists, further objects and even functions. 
+            There are a few ways to create objects but the esiest way is to use curly brackets <code>{ }</code>. This style of defining objects is called JSON (JavaScript Object Notation). Objects are very useful for grouping attributes so thay stick together as you pass data around your code and functions. It's also a popular format for transfering data between computers across the whole world.</p>
+            <p>Here is an example that illustrate the value of containering data. It consists of an object with one attribute that holds a list <code>[ ]</code> and each item in the list is an object with multiple attributes:</p>
+            <pre><coode>
+let myObject = {
+    "avengers": [
+        {
+            "name": "Natasha Romanoff",
+            "character": "Black Widow",
+            "joined": 1973
+        }
+        {
+            "name": "Tony Stark"
+            "character": Iron Man,
+            "joined": 1963 
+        },
+        {
+            "name": "Janet van Dyne",
+            "character": "Wasp",
+            "joined": 1963
+        },
+        {
+            "name": "T'Challa",
+            "character": "Black Panther",
+            "joined": 1968
+        }
+    ]
+}                
+            </coode></pre>
+            <p>To reference values from an object we use the dot <code>.</code> notation. Here is what some example expressions would result in:</p>
+            <pre><code>
+myObject.avengers.count
+<i>&gt; 4</i>
+
+myObject.avengers[2].character
+<i>&gt; "Wasp"</i>
+
+myObject.avengers.filter(avenger => avenger.joined > 1970)
+<i>[
+    {
+        "name": "Natasha Romanoff",
+        "character": "Black Widow",
+        "joined": 1973
+    }
+]</i>
+            </code></pre>
+            <code>filter</code> is a cool method available on arrays/lists.
+        </div>
+        <h2>Full screen</h2>
+        <p>The <code>canvas</code> element default size is quite small so let's make it fill the page using a combination of size and scale. 
             Define another constant in the <code>Define constants</code> section of code. This value will be used to configure the canvas scale so that the shapes have nice smooth edges.</p>
         <pre><code>
 const SCALE = 2
@@ -126,6 +176,16 @@ if (ball.y > canvas.height - BALLSIZE) {
     ball.yV = -ball.yV * MOMENTUM
 }
         </code></pre>   
+        <h2>Add a background</h2>
+        <p>Everyone knows dodgeball is played in gyms so let's add a background. We can do this by jumping back to our CSS. A new declaration in in the body selector will let us set a background image for the whole page.</p>
+        <pre><code>
+<i>body {
+    margin: 0;
+    overflow: hidden;</i>
+    background-image: url("https://code.qantas.com/learn-to-code/images/gym.png")
+    background-size: cover;
+<i>}</i>
+        </code></pre>          
         <h2>The element of chance</h2>
         <p>We can use a random function so that our ball starts in a different location and traveling in a different direction and speed each time we run our code by updating the initial values we define for our ball.</p>
         <p>The <code>x</code> value can be any number from zero to the width (minus the width of the ball) of the canvas but Math.random() produces a random value between 0 and 1 so if we multiply them together, we will get a random position at a particular percentage of the canvas width.</p>
@@ -140,7 +200,7 @@ if (ball.y > canvas.height - BALLSIZE) {
 }</i>
         </code></pre>                   
         <p><i>NOTE: We can format the code for our object over multiple lines now to make it easier to read.</i></p>  
-        <h2>Multi-ball</h2>
+        <h2>Multiball</h2>
         <p>Computers are great at repeating things so let's use that power to get some more balls by:</p>
         <ul>
             <li>Adding another constant for the number of balls to use.
@@ -187,8 +247,11 @@ balls.forEach(ball => {
             </li>
         </ul>
         <p>Now let's run the code to get 2 balls. If you need to check your code a full listing to this point is provided in the lesson Code a Game - Part 2.</p>
-        <p>When things are working, and now that you have done the work to support 2 balls, let's get more. Just set <code>TOTALBALLS = 20</code> or what about 50, 100 or even 1000?. 
-            It's here where you might get a sense of the power of coding where the coder plans, organises and prepares structures, shapes, designs and patterns but the computer does the work.</p>
+        <p>When things are working, and now that you have done the work to support 2 balls, let's get more. Just set <code>TOTALBALLS = 20</code> or what about 50, 100 or even 1000?.</p>
+        <div class="panel">
+            <aside>Note</aside>
+            <p>It's at this point we hope you might get a sense of the power of coding and the role of the coder to plan, organise and prepare structures, shapes, designs and patterns and then let computers do the work.</p>
+        </div>
         <script>
             let pos = localStorage.getItem(`scrollPos-${window.location.pathname}`)
             document.documentElement.scrollTop = pos

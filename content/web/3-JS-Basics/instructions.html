@@ -11,7 +11,7 @@
         <h2>Expressions</h2>
         <p>Using the HTML <code>script</code> element we can add JavaScript to our pages. By placing it as the last item in our body our JavaScript code will run after the browser loads the main parts of the page.</p>
         <p>In the example code <code>"Hello World"</code> is assigned to the <code>innerHTML</code> attribute of the <code>p</code> element using it's id as a reference. <code>document.getElementById</code> is a method that browsers provide to your JavaScript code for referencing elements on your page.</p>
-        <p>We are going to use this setup to explore expressions which in this case is the code to on the right hand side of the <code>=</code></p>        
+        <p>We are going to use this setup to explore expressions which in this case is the code to on the right hand side of the <code>let result =</code></p>        
         <h3>Maths Expressions</h3>
         <p>You can replace the <code>"Hello World"</code> with <code>(4 + 7) / 2</code> and <code>Run the Code</code>. This is an expression just like in maths or what you might use in an Excel formula.</p>
         <table>
@@ -23,10 +23,16 @@
             <tr><td>To the power of</td><td>4 ** 2</td></tr>
             <tr><td>Remainder from</td><td>11 % 2</td></tr>
             <tr><td>Brackets</td><td>((4 + 7) + 100 / 5) * 3</td></tr>
-            <tr><td>Square Root</td><td>Math.abs(-5)</td></tr>
-            <tr><td>Absolute Value</td><td>Math.sqrt(16)</td></tr>
+            <tr><td>Absolute Value</td><td>Math.abs(-5)</td></tr>
+            <tr><td>Square Root</td><td>Math.sqrt(16)</td></tr>
             <tr><td><i>etc...</i></td><td><i>See: <a target="_blank" href="https://www.w3schools.com/js/js_math.asp">www.w3schools.com/js/js_math</a></i></td></tr>
         </table>
+        <div class="panel">
+            <aside><i>i</i> - Chrome Developer Tools</aside>
+            <p>If you are using the Chrome browser, right click somewhere on a web page and choose <code>Inspect</code>.
+            This is a quick way to launch the Chrome Developer Tools which lets you see the HTML, CSS and JavaScript used in any web page. Looking at other peoples code is a good way to learn.</p>
+            <p>There is also a Console tab which lets you see any errors on your page. The console is also a JavaScript interpreter so you can try any of these expressions there with instance feedback.</p>
+        </div>
         <h3>String Expressions</h3>
         <p>Strings are text values and, like the <code>"Hello World"</code> example, they are usually defined by putting quotes around words. Text in quotes is not treated like code but more like a data value.</p>
         <p>JavaScipt has a easy way to construct strings from other expressions using the back-tick character <code>`</code> usually found in the very top left of your keyboard.</p>
@@ -49,28 +55,54 @@
             <tr><td>And (both conditions need to be true)</td><td>3 &lt; 7 && 5 == 3 + 2</td></tr>
             <tr><td>Or (either condition need to be true)</td><td>3 &lt; 7 && 5 == 7</td></tr>
         </table>
-        <h2>Variables</h2>
+        <h2>Variables & Constants</h2>
+        <h3>Variables</h3>
         <p>Rather than just putting information on the page we can store results of expressions in memory so our page or app can use them later. We are already doing this for our result value which is stored in memory and then referenced in the <code>//Show result</code> section of code to display it on our web page. 
-            We can asign values to a name by using the <code>let</code> key word followed by the name to use and an expression. These named references are commonly called variables because while their reference name is consistant the value they hold can be changed.</p>
+            We can asign values to a name by using the <code>let</code> key word followed by the name to use the <code>=</code> (assignment operator) and an expression. These named references are commonly called variables because while their reference name is consistant the value they hold can be changed.</p>
         <p>Try replacing the <code>Evaluate expression</code> section of code with the following:</p>
         <pre><code>
+<i>//Evaluate expression</i>
 let a = 4
 let b = 8
 a = 12
 let result = a * b
         </code></pre>
         <p>This defines <code>a</code> and sets it's value to 4, then defines <code>b</code> and sets it's value to 8. After that <code>a</code> is updated to now be 12 and then finally we use those variable names in our expression just like we would with normal values.</p>
-        <h3>Data Types</h3>
-        <p>At this point we should look at data types. Up to now we have been working with strings, numbers and Booleans but JavaScript supports other data types such as <code>arrays</code> (which are ordered lists of things) and more complex <code>objects</code> which we will look at in a later lesson.</p>
-        <p>To specify an array/list we can use square brackets to both define a list as well as get an item from the list by it's index number (position in the list):</p>
+        <div class="panel">
+            <aside>Note</aside>
+            <p>The <code>let</code> key-word defines the variable so when we assign it new value we don't use <code>let</code> again as the variable name is already defined.</p>
+        </div>
+        <h3>Constants</h3>
+        <p>Constants work exactly the same as variables with one important difference. You can not assign a new value to them after they are defined. In this sense they are constant. This is a very useful construct becfause you can ensure that fixed known values can not be acidently changed. There is a common practice of making constant names all capital letters to help distinquish them from variable names. Try:</p>
         <pre><code>
+<i>//Evaluate expression</i>
+const MINUTES_PER_HOUR = 60
+let movieLengthInMinutes = 138 
+let result = `Movie length in hours is ${movieLengthInMinutes / MINUTES_PER_HOUR}`
+        </code></pre>    
+        <p>If you try to reassign MINUTES_PER_HOUR to 120 (imagine how much we could get done before lunch) you will get an error.</p>    
+        <pre><code>
+<i>//Evaluate expression</i>
+<i>const MINUTES_PER_HOUR = 60</i>
+MINUTES_PER_HOUR = 120
+<i>let movieLengthInMinutes = 138 
+let result = `Movie length in hours is ${movieLengthInMinutes / MINUTES_PER_HOUR}`</i>
+        </code></pre>  
+        <div class="panel">
+            <aside><i>i</i> - Data Types</aside>
+            <p>At this point we should look at data types. Up to now we have been working with strings, numbers and Booleans but JavaScript supports other data types such as <code>arrays</code> (which are ordered lists of things) and more complex <code>objects</code> which we will look at in a later lesson.</p>
+            <p>To specify an array/list we can use square brackets to both define a list as well as get an item from the list by it's index number (position in the list):</p>
+            <pre><code>
+<i>//Evaluate expression</i>
 let people = ["Tim", "Karen", "Simon", "Linda"]
 let result = people[2]
-        </code></pre>
-        <p>You may have expected to see "Karen" as the result but indexes in JavaScript, and most other languages, start with zero for the first item, 1 for the second, etc..</p>
+            </code></pre>
+            <p>You may have expected to see "Karen" as the result but indexes in JavaScript, and most other languages, start with zero for the first item, 1 for the second, etc..</p>    
+        </div>
         <h2>Conditions</h2>
         <p>Conditions let you branch your code into to blocks where one gets used if the condition is true and the other one gets used if it's false. The basic <code>if...else</code> for example required a Boolean Expression (see above) and then has two blocks of code as follows:</p>
         <pre><code>
+<i>//Evaluate expression</i>
 let index = 0
 let result = ""
 let people = ["Tim", "Karen", "Simon", "Linda"]
@@ -85,6 +117,7 @@ if (people[index] == "Tim") {
         <p>Functions in code are much like a function in maths, they take parameters and usually produce a result. There are many built-in functions available such as the Math functions we saw earlier an where functions are grouped together like that it's called a library or a library of functions.</p>
         <p>It's easy to define your own functions by using the <code>function</code> keyword. Here is an example:</p>
         <pre><code>
+<i>//Evaluate expression</i>
 function greeting(name) {
     return `Hello ${name}`
 }
@@ -95,11 +128,55 @@ let result = greeting(people[index])
         </code></pre>
         <p>The function definition consists of a name 'greeting' followed by brackets with the names of the parameters it is expecting to get when called. The body of the function is a code block in <code>{...}</code> curly brackets that is executed when the function is used. Functions have a special key word <code>return</code> that is used to sent the result back to the part of your code that made use of the function.</p>
         <p>The last line here uses the name from the list and then calls the <code>greeting</code> function to turn it into a message.</p>
+        <p>Structuring your code into well defined functions helps to reduce duplication because you don't have to code the same behaviour again as you can just use the function. </p>
+        <div class="panel">
+            <aside><i>i</i> - Pure Functions</aside>
+            <p>The best types of functions are called pure functions which take parameters, return a value and have no side effects to other state in the system. 
+                The greeting function above is pure in that the only work it is doing involves the values passed to it and the only effect it has on the world is the value returned from it. Here is an example of a none pure function:
+            </p>
+            <pre><code>
+<i>//Evaluate expression</i>
+function countItems(list) {
+    result = list.length
+}
+
+let result = ""
+countItems([3, 5, 8])
+            </code></pre>
+            <p>The problem here is that the result variable is changed directly from inside the function. It works, we get an answer, but it makes our code harder to reason about and much harder to test. Let's fix it:</p>
+            <pre><code>
+<i>//Evaluate expression
+function countItems(list) {</i>
+    return list.length
+<i>}
+
+let result =</i> countItems([3, 5, 8])
+            </code></pre>
+            <p>Pure functions make testing easier which can same huge amounts of time an effort. Here is how we could test our function before we use it:</p>
+            <pre><code>
+<i>//Evaluate expression
+function countItems(list) {
+    return list.length
+}</i>
+
+//Tests (usually coded in a separate file)
+console.assert(
+    countItems(["5", 2, 1, "Bob"]) == 4
+)
+console.assert(
+    countItems([]) == 0
+)
+
+<i>let result = countItems([3, 5, 8])</i>
+            </code></pre>
+        </div>
+        
+
         <h2>Loops</h2>
         <p>Computers are great at repeating tasks using loops. Looping over the items in a list is easy using the <code>map</code> method of a list. The <code>map</code> method takes a function as a parameter and applies it to each item in the list. The output is a new list containing each value generated from the supplied function.</p>
         <pre><code>
+<i>//Evaluate expression</i>
 function initials(name) {
-    //Extract the first character from the name
     return name.substring(0, 1)
 }
 
@@ -107,22 +184,40 @@ let people = ["Tim", "Karen", "Simon", "Linda"]
 let result = people.map(initials)
         </code></pre>
         <p>As with other patterns of coding there are other ways of looping over areas of your code. See: <a target="_blank" href="https://www.w3schools.com/js/js_loop_for.asp">www.w3schools.com/js/js_loop_for</a></p>
-        <h2>Inline Functions (Closures)</h2>
-        <p>An function can be inserted into an expression rather than being defined with a name. These are also called anonymous functions (as they have no name) or closures and are very useful.</p>
+        <h2>Anonymous/Inline Functions (Closures)</h2>
+        <p>A function can be inserted into an expression 'inline' rather than being defined with a name. These are also called anonymous functions (as they have no name) or closures. Regardless of what we call them, they are very useful.</p>
         <p>Here is the same result as the last example but using an in-line function rather than a named function:</p>
         <pre><code>
+<i>//Evaluate expression
 let people = ["Tim", "Karen", "Simon", "Linda"]
-let result = people.map(function (person) {
+let result =</i> people.map(function (person) {
     return person.substring(0, 1)
 })
         </code></pre>
-        <p>JavaScript has some short hand for defining a function that doesn't need us to use the code <code>function</code> any more. This is done by specifying the parameters to the function followed by <code>=&gt;</code> and then the expression to apply.</p>
+        <p>JavaScript has some short hand for defining a function that doesn't need us to use the key-word <code>function</code> any more. This is done by specifying the parameters to the function followed by <code>=&gt;</code> and then the code block or expression to apply.</p>
         <p>Also where there is only one parameter we don't need the brackets around the parameters. And if we code in an expression without a code block we don't need the special return key-word either. So the solution simplifies down to:</p>
         <pre><code>
+<i>//Evaluate expression
 let people = ["Tim", "Karen", "Simon", "Linda"]
-let result = people.map(person => person.substring(0, 1))
+let result = people.map(</i>person => person.substring(0, 1)<i>)</i>
         </code></pre>
         <p>Nice!</p>
+        <div class="panel">
+            <aside><i>i</i> - Indents & Comments</aside>
+            <p>It's common practice in JavaScript to indent (using spaces or the <code>tab</code> key) code that sits within <code>{</code>blocks<code>}</code> (code that is surrounded by curly brackets). This helps with maintaining your code as it's easier to read and see the structure.</p>
+            <p>Another helpful option is the ability to add notes so that your JavaScript is self documented. They can be placed on their own line, multiple lines or at the end of lines of code. These are called comments and in JavaScript they look like:</p>
+            <pre><code>
+// A single line comment. This does not affect the behaviour of the code.
+
+let x = 1 // These are useful to annotate specific lines.
+
+/* This a a comment 
+over multiple
+lines
+*/            
+            </code></pre>
+        </div>
+        <p>For more information about the features and syntax of JavaScript see: <a target="_blank" href="https://www.w3schools.com/js/">www.w3schools.com/js</a>.</p>
         <script>
                 let pos = localStorage.getItem(`scrollPos-${window.location.pathname}`)
                 document.documentElement.scrollTop = pos
