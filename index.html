@@ -174,10 +174,24 @@
                 printMargin: false
             })
             editor.setTheme("ace/theme/twilight")
-            if(window.location.hash === "#light") {
-                editor.setTheme("ace/theme/chrome")
-            }
             editor.setFontSize(14)
+
+            window.onhashchange = function() {
+                window.location.reload()
+            }
+
+            let hash = window.location.hash
+            if (hash.startsWith('#')) {
+                options = hash.substring(1, hash.length).split(',')
+                options.forEach(option => {
+                    if (option == "light") {
+                        editor.setTheme("ace/theme/chrome")
+                    }
+                    if (option.startsWith("f")) {
+                        editor.setFontSize(parseInt(option.substring(1, option.length)))
+                    }
+                })
+            }
             editor.on('change', function (e) {
                 clearTimeout(change_timer);
                 change_timer = setTimeout(function() {
