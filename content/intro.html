@@ -4,9 +4,9 @@
         <link rel="stylesheet" href="/learn-to-code/content/theme.css">
     </head>
     <body>
-        <h1>Learn to Code</h1>
-        <p>Welcome to code.qantas.com - Learn to Code</p>
-        <p>To get started select an edition and a lesson from the menu.</p>
+        <aside>Learn to Code</aside>
+        <h1>code.qantas.com - Learn to Code</h1>
+        <p>To get started select an edition and a lesson from the menu or just code.</p>
         <p><i>NOTE: For best results use the Chrome browser.</i></p>
         <script>
                 let pos = localStorage.getItem(`scrollPos-${window.location.pathname}`)
@@ -15,5 +15,12 @@
                     localStorage.setItem(`scrollPos-${window.location.pathname}`, document.documentElement.scrollTop)
                 })
         </script>  
+        <div class="panel">
+            <aside><i>i</i> - How to use this tool</aside>
+            <p>Edit the code on the left and then click <code style="color: green; background-color: white; border: 1px solid green">Run the Code</code> above to see the results.
+                To get back to these instructions click <code style="color: maroon; background-color: white; border: 1px solid maroon">Stop the Code</code>. 
+                If your code is not correct the editor will give you warnings by showing a small symbol in the left margin. Hover over the symbol to get tips on what might be wrong.
+            </p>
+        </div>
     </body>
 </html>

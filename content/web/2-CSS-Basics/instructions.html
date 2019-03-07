@@ -22,21 +22,21 @@ font-size: 30px;
                 The 'color' code starts with a <code>#</code> and then has a pair of HEX digits for the amounts of RED, GREEN and BLUE to mix together. 
                 As each single digit can be between 0 and 15, each pair can be a number between 0 and 255 which gives you 255 levels of brightness per primary colour or a total of over 16 million mixed colours.
                 So #<span style="color: red;">88</span><span style="color: green;">00</span><span style="color: blue;">FF</span>; means about half the amount of possible red, no green at all and full blue.
-                Try changing the digits in the 'color' declaration and <code>Run the Code</code> to see how it affects the heading.
+                Try changing the digits in the 'color' declaration and <code style="color: green; background-color: white; border: 1px solid green">Run the Code</code> to see how it affects the heading. 
             </li>
             <li><code>font-size: 30px</code> - This sets the size of the font for the selected elements on the page. In this case the unit of measurement is pixels (px).</li>
         </ul>
         <h2>Other types of Selectors</h2>
         <ul>
             <li><code>#<i>id</i></code> - If you want to style a very specific element on your page you can use a selector that starts with a # followed by the value of the id attribute of a HTML element. 
-                In the example code the <code>img</code> element has an id of "cat" so if you wanted to style that image without affecting other elements then you could add this to the style tag:<br/>
+                In the example code the <code>img</code> element has an id of "cat" so if you wanted to style that image without affecting other elements then you could add this to the style tag and then <code style="color: green; background-color: white; border: 1px solid green">Run the Code</code><br/>
                 <pre><code>
 #cat {
     border-radius: 40px;
     float: right;
 }
                 </code></pre>
-                Which will cause the image with an id attribute of 'cat' to have rounded corners with a radius of 40 pixels and have it 'float' over to the right of the page allowing the paragraphs of text to move up and fit next to the image.
+                These will cause the image with an id attribute of 'cat' to have rounded corners with a radius of 40 pixels and have it 'float' over to the right of the page allowing the paragraphs of text to move up and fit next to the image.
             </li>
             <li><code>.<i>class</i></code> - If you have elements of the same type, such as paragraphs, but you only want to style specific ones then you can assign classes to your HTML and then select all elements with that class name by using a dot 
                 <code>.</code> prefix. For example:
@@ -45,7 +45,7 @@ font-size: 30px;
     background-color: #008800;
 }
                 </code></pre>
-                Which will cause the paragraphs with the class attribute of 'info' to have a green background.</li>
+                Which will cause the paragraphs with the class attribute of 'info' to have a green background. </li>
             </ul>
             <div class="panel">
                 <aside><i>i</i> - Indents & Comments</aside>

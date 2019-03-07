@@ -10,20 +10,24 @@
                 margin: 0;
                 overflow: hidden;
                 background-image: url("https://code.qantas.com/learn-to-code/images/gym.png");
+                background-repeat: no-repeat;
                 background-size: cover;
             }
             #scoreboard {
-                background-color:rgba(0, 0, 0, 0.3);
+                background-image: url("https://code.qantas.com/learn-to-code/images/scoreboard.png");
+                background-repeat: no-repeat;
+                background-size: cover;
                 position: absolute;
+                opacity: 0.9;
                 top: 20px;
                 right: 20px;
-                width: 400px;
-                height: 30px;
+                width: 300px;
+                height: 44px;
                 border-radius: 12px;
                 font-family: helvetica;
-                font-size: 28px;
-                padding: 20px;
-                color: #880000;
+                font-size: 22px;
+                padding: 40px 20px 0 120px;
+                color: #440000;
             }
         </style>
     </head>
@@ -42,6 +46,7 @@
             const PERSONSIZE = 160
             const PERSONSPEED = 10
             const STOPGAP = 5
+            const COMFORTABLEDISTANCE = 300 //Extra credit
 
             //Set up canvas
             let canvas = document.getElementById("arena")
@@ -69,12 +74,15 @@
                 xV: 0
             }
             let mouseX = 0
-            let hits = 0
             let scoreboard = document.getElementById("scoreboard")
             let start = Date.now()
+            let hits = 0
 
             let personImage = new Image()
             personImage.src = "https://code.qantas.com/learn-to-code/images/emoji.png"
+
+            let sadImage = new Image()  //Extra credit
+            sadImage.src = "https://code.qantas.com/learn-to-code/images/sad-emoji.png"
 
             let ballImage = new Image()
             ballImage.src = "https://code.qantas.com/learn-to-code/images/ball.png"
@@ -86,6 +94,9 @@
             
             //Define main loop function
             function loop() {
+
+                //Extra credit; Assume happy until not
+                let sad = false
 
                 //Update the person
                 if (mouseX + STOPGAP < person.x + PERSONSIZE / 2) {
@@ -129,12 +140,12 @@
                     let ballCenterX = ball.x + BALLSIZE / 2
                     let ballCenterY = ball.y + BALLSIZE / 2
                     
-                    //Calculate the distance between the objects
-                    let offsetX = personCenterX - ballCenterX
-                    let offsetY = personCenterY - ballCenterY
-                    
-                    //Apply Pythagoras' Theorem
-                    let distance = Math.sqrt(offsetX * offsetX + offsetY * offsetY)
+                    //Measure the right angle edges of the triangle
+                    let lengthX = personCenterX - ballCenterX
+                    let lengthY = personCenterY - ballCenterY
+
+                    //Apply Pythagoras' Theorem<
+                    let distance = Math.sqrt(lengthX * lengthX + lengthY * lengthY)
                     
                     //Calculate mimimum distance
                     let minDistance = PERSONSIZE / 2 + BALLSIZE / 2
@@ -143,13 +154,21 @@
                     if (distance <= minDistance) {
                         hits = hits + 1
                     }
+ 
+                    //Extra credit
+                    if (distance < COMFORTABLEDISTANCE) {
+                        sad = true
+                    }
 
                     //Update scoreboard
                     let seconds = Math.round((Date.now() - start) / 1000)
-                    scoreboard.innerHTML = `${seconds} Seconds - ${hits} Hits = ${seconds - hits}`
+                    let health = seconds - hits
+                    scoreboard.innerHTML = `${seconds} Sec. - ${hits} Hits = ${health} Health` 
+                    
+                    //Check for game over
                     if (seconds - hits < 0) {
                         clearInterval(run)
-                        scoreboard.innerHTML = "GAME OVER!"
+                        scoreboard.innerHTML = `GAME OVER! Final Score: ${seconds}`
                     }                  
 
                 })
@@ -161,7 +180,12 @@
                     canvasContext.drawImage(ballImage, ball.x, ball.y, BALLSIZE, BALLSIZE)
                 })
                 
-                canvasContext.drawImage(personImage, person.x, person.y, PERSONSIZE, PERSONSIZE)
+                if (sad) {
+                    //Extra credit
+                    canvasContext.drawImage(sadImage, person.x, person.y, PERSONSIZE, PERSONSIZE)                
+                } else {
+                    canvasContext.drawImage(personImage, person.x, person.y, PERSONSIZE, PERSONSIZE)                
+                }
 
             }
 

@@ -8,14 +8,14 @@
         <h1>Code a Game - Part 1</h1>
         <p>Let's make a browser based game using the <code>canvas</code> HTML element.</p> 
         <p>On the left is the basic structure we need to get started where the setInterval method at the bottom lets us set how often our main loop should be executed in milliseconds. 
-            There are 1000 milliseconds in a second so we can divide 1000 by the framerate constant to get a nice smooth 60 frames a second..</p> 
+            There are 1000 milliseconds in a second so we can divide 1000 by the <code>FRAMERATE</code> constant to get a nice smooth 50 frames a second..</p> 
         <p>On line 20 we get a reference to the canvas element defined in the HTTML above. After that we use the canvas method <code>getContext</code>. This returns a graphics context that will let us draw things on our web page.</p>
-        <p>One line 24 we define a ball variable and assign an object with one attribute called <code>x</code> and an initial value of 1.</p>
-        <p>If you run this all it does so far is move a square across to the right forever.</p>
+        <p>One line 24 we define a <code>ball</code> variable and assign an object with one attribute called <code>x</code> and an initial value of 1.</p>
+        <p>If you <code style="color: green; background-color: white; border: 1px solid green">Run the Code</code> all it does so far is move a square across to the right forever.</p>
         <div class="panel">
             <aside><i>i</i> - JavaScript Objects</aside>
-            <p>You could think of objects as containers that can hold named items including numbers, strings, lists, further objects and even functions. 
-            There are a few ways to create objects but the esiest way is to use curly brackets <code>{ }</code>. This style of defining objects is called JSON (JavaScript Object Notation). Objects are very useful for grouping attributes so thay stick together as you pass data around your code and functions. It's also a popular format for transfering data between computers across the whole world.</p>
+            <p>You can think of objects as containers that can hold named items including numbers, strings, lists, further objects and even functions. 
+            There are a few ways to create objects but the esiest way is to use curly brackets <code>{ }</code>. This style of defining objects is called <a target="_blank" href="https://www.w3schools.com/whatis/whatis_json.asp">JavaScript Object Notation</a> (JSON). Objects are very useful for grouping attributes so thay stick together as you pass data around your code and functions. It's also a popular format for transfering data between computers across the whole world.</p>
             <p>Here is an example that illustrate the value of containering data. It consists of an object with one attribute that holds a list <code>[ ]</code> and each item in the list is an object with multiple attributes:</p>
             <pre><coode>
 let myObject = {
@@ -64,18 +64,18 @@ myObject.avengers.filter(avenger => avenger.joined > 1970)
         </div>
         <h2>Full screen</h2>
         <p>The <code>canvas</code> element default size is quite small so let's make it fill the page using a combination of size and scale. 
-            Define another constant in the <code>Define constants</code> section of code. This value will be used to configure the canvas scale so that the shapes have nice smooth edges.</p>
+            Define another constant in the <code>//Define constants</code> section of code. This value will be used to configure the canvas scale so that the shapes have nice smooth edges.</p>
         <pre><code>
 const SCALE = 2
         </code></pre>
-        <p>Add the following, to the top of the <code>Set up canvas</code> section of code, to tell the canvas to stretch to the size and scale of the whole page:</p>
+        <p>Add the following, to the top of the <code>//Set up canvas</code> section of code, to tell the canvas to stretch to the size and scale of the whole page:</p>
         <pre><code>
 canvas.width = window.innerWidth * SCALE
 canvas.height = window.innerHeight * SCALE
 canvas.style.width = `${window.innerWidth}px`
 canvas.style.height = `${window.innerHeight}px`
         </code></pre>
-        <p>If you run the code you will see that there is still bit of white space between the edges of the page and the canvas but we can remove that using CSS with a new selector and declarations in the <code>&lt;style&gt;</code> tag.</p>   
+        <p>If you <code style="color: green; background-color: white; border: 1px solid green">Run the Code</code> you will see that there is still bit of white space between the edges of the page and the canvas but we can remove that using CSS with a new selector and declarations in the <code>&lt;style&gt;</code> tag.</p>   
         <pre><code>
 body {
     margin: 0;
@@ -88,6 +88,7 @@ body {
     border:</i> 0<i>;
 }</i>
         </code></pre> 
+        <p><code style="color: green; background-color: white; border: 1px solid green">Run the Code</code></p>
         <h2>Check for walls</h2>
         <p>Let's make it so that if the box gets the right of the screen then it bounces back. We can do this by:</p>
         <ul>
@@ -96,7 +97,7 @@ body {
 <i>let ball = {x: 1</i>, xV: 5<i>}</i>
                 </code></pre>
             </li>
-            <li>Adding an <code>if</code> condition into our loop function. The <code>Update values</code> section can change to:
+            <li>Adding an <code>if</code> condition into our loop function. The <code>//Update values</code> section can change to:
             <pre><code>
 <i>//Update values</i>
 if (ball.x > canvas.width) {
@@ -122,10 +123,11 @@ if (ball.x < 0) {
 <i>ball.x = ball.x + ball.xV</i>
         </code></pre>
         <p><i>NOTE: You can see the same <code>ball.xV = -ball.xV</code> expression being used here. This still works because if <code>xV</code> is -10 then the expression resolves to <code>ball.xV = -(-10)</code> and because a negative of a negative is a positive our box will start heading to the right again.</i></p>
+        <p><code style="color: green; background-color: white; border: 1px solid green">Run the Code</code></p>
         <h2>Boxes are boring</h2>
         <p>Let's draw an image rather than a box by:</p>
         <ul>
-            <li>Adding and loading an image in our <code>Define variables</code> section: 
+            <li>Adding and loading an image in our <code>//Define variables</code> section: 
                 <pre><code>
 let ballImage = new Image()
 ballImage.src = "https://code.qantas.com/learn-to-code/images/ball.png"
@@ -134,7 +136,7 @@ ballImage.src = "https://code.qantas.com/learn-to-code/images/ball.png"
                 <pre><code>
 <i>canvasContext.</i>drawImage(ballImage,<i> ball.x, 30, BALLSIZE, BALLSIZE)</i>
                 </code></pre>
-                Where the parameters are drawImage(image, left, top, width, height)
+                <i>NOTE: The parameters are drawImage(image, left, top, width, height)</i>
             </li>
         </ul>
         <p>You may notice that the ball still goes off the right hand side a bit before bouncing back. This is because the coordinate system of the canvas draws things from the top left corner of the window to the top left corner of the image which means we are checking if the left edge of the image has reached the wall. We can fix this by subtracting the ball width from the window width in our <code>if</code> condition:</p>
@@ -144,8 +146,9 @@ ballImage.src = "https://code.qantas.com/learn-to-code/images/ball.png"
     <i>etc...</i>
         </code></pre>
         <p><i>NOTE: It's still a good idea to force the ball completely back into view so having checked that the ball has gone too far we can set it to the right hand edge minus it's width.</i></p>
+        <p><code style="color: green; background-color: white; border: 1px solid green">Run the Code</code></p>
         <h2>Add some gravity</h2>
-        <p>In real life gravity is a constant force that applies a velocity of 9.8 meters per second. We can use a <code>const</code> to set a constant for gravity in our <code>Define constants</code> section of code.</p>        
+        <p>In real life gravity is a constant force that applies a velocity of 9.8 meters per second. We can use a <code>const</code> to set a constant for gravity in our <code>//Define constants</code> section of code.</p>        
         <p>We can use a momentum constant to specify how much bounce the ball has. A value just less than 1 will mean that the amount of momentum the ball carries should be slightly reduced each bounce due to friction.</p>
         <pre><code>
 const GRAVITY = 9.8
@@ -155,12 +158,12 @@ const MOMENTUM = 0.98
         <pre><code>
 <i>let ball = {x: 1, xV: 5</i>, y: 30, yV: 0<i>}</i>
         </code></pre>
-        <p>Next we can add to the top of our <code>Update values</code> section in our main loop to apply the gravity to the vertical velocity of the ball.</p>
+        <p>Next we can add to the top of our <code>//Update values</code> section in our main loop to apply the gravity to the vertical velocity of the ball.</p>
         <pre><code>
 ball.yV = ball.yV + GRAVITY / FRAMERATE  
         </code></pre>
         <p>NOTE: We need to divide gravity by the frame rate because our constant value is gravity's affect per second but we are updating our values about 60 times per second.</p>
-        <p>And then to the end of the <code>Update values</code> section to set the <code>ball.y</code> position with the calculated vertical velocity <code>ball.yV</code>.</p>
+        <p>And then to the end of the <code>//Update values</code> section to set the <code>ball.y</code> position with the calculated vertical velocity <code>ball.yV</code>.</p>
         <pre><code>
 ball.y = ball.y + ball.yV
         </code></pre>
@@ -168,6 +171,7 @@ ball.y = ball.y + ball.yV
         <pre><code>
 <i>canvasContext.drawImage(ballImage, ball.x,</i> ball.y<i>, BALLSIZE, BALLSIZE)</i>
         </code></pre>
+        <p><code style="color: green; background-color: white; border: 1px solid green">Run the Code</code></p>
         <h2>Bounce off the floor</h2>
         <p>So the ball is now dropping through the floor but we can use the same technique as we did for the walls with an extra condition. Just before we update <code>ball.y</code> value add:</p>
         <pre><code>
@@ -176,6 +180,7 @@ if (ball.y > canvas.height - BALLSIZE) {
     ball.yV = -ball.yV * MOMENTUM
 }
         </code></pre>   
+        <p><code style="color: green; background-color: white; border: 1px solid green">Run the Code</code></p>
         <h2>Add a background</h2>
         <p>Everyone knows dodgeball is played in gyms so let's add a background. We can do this by jumping back to our CSS. Some new declarations in the body selector will let us set a background image for the whole page.</p>
         <pre><code>
@@ -185,12 +190,13 @@ if (ball.y > canvas.height - BALLSIZE) {
     background-image: url("https://code.qantas.com/learn-to-code/images/gym.png")
     background-size: cover;
 <i>}</i>
-        </code></pre>          
+        </code></pre>   
+        <p><code style="color: green; background-color: white; border: 1px solid green">Run the Code</code></p>       
         <h2>The element of chance</h2>
         <p>We can use a random function so that our ball starts in a different location and traveling in a different direction and speed each time we run our code by updating the initial values we define for our ball.</p>
         <p>The <code>x</code> value can be any number from zero to the width (minus the width of the ball) of the canvas but Math.random() produces a random value between 0 and 1 so if we multiply them together, we will get a random position at a particular percentage of the canvas width.</p>
-        <p>For the <code>y</code> value we want to start the ball higher in the canvas so that it has space to fall and bounce so multiplying the random amount of 1 to a third of the height should work fine but feel free to experiment with these values.</p>
-        <p>For the velocity values we can get a random number between 0 and 10 and then subtract 5 to get a number from -5 to +5.</p>
+        <p>For the <code>y</code> value we want to start the ball higher in the canvas so that it has space to fall and bounce so multiplying the random value to a third of the height should work fine but feel free to experiment with these values.</p>
+        <p>For the velocity values we can get a random number between 0 and 30 and then subtract 15 to get a number from -15 to +15.</p>
         <pre><code>
 <i>let ball = {
     x:</i> Math.random() * (canvas.width - BALLSIZE)<i>, 
@@ -200,6 +206,7 @@ if (ball.y > canvas.height - BALLSIZE) {
 }</i>
         </code></pre>                   
         <p><i>NOTE: We can format the code for our object over multiple lines now to make it easier to read.</i></p>  
+        <p><code style="color: green; background-color: white; border: 1px solid green">Run the Code</code></p>
         <h2>Multiball</h2>
         <p>Computers are great at repeating things so let's use that power to get some more balls by:</p>
         <ul>
@@ -225,7 +232,7 @@ for(let i = 0; i < TOTALBALLS; i++) {
 }                
                 </code></pre>                   
             </li>
-            <li>Inside our main loop we need to now update the positions for each ball in our list not just one ball. Using the <code>forEach</code> method this is easy. Wrap the existing code in the <code>Update values</code> section in the following:
+            <li>Inside our main loop we need to now update the positions for each ball in our list not just one ball. Using the <code>forEach</code> method this is easy. Wrap the existing code in the <code>//Update values</code> section in the following:
                 <pre><code>
 <i>//Update values</i>
 balls.forEach(ball => {      
@@ -235,7 +242,7 @@ balls.forEach(ball => {
                 <p>This will run the updates we coded but now once for each ball in the list.  Another way to thing about <code>forEach</code> in this context is to say for each <code>ball</code> in my list of <code>balls</code> do something.
                 </p>               
             </li>
-            <li>Now we need to do the same for the <code>Redraw the screen</code> section to draw all of the balls not just one.
+            <li>Now we need to do the same for the <code>//Redraw the screen</code> section to draw all of the balls not just one.
                 <pre><code>
 <i>//Redraw the screen
 canvasContext.clearRect(0, 0, canvas.width, canvas.height)</i>
@@ -246,7 +253,7 @@ balls.forEach(ball => {
                 </code></pre>   
             </li>
         </ul>
-        <p>Now let's run the code to get 2 balls. If you need to check your code a full listing to this point is provided in the lesson Code a Game - Part 2.</p>
+        <p>Now let's <code style="color: green; background-color: white; border: 1px solid green">Run the Code</code> to get 2 balls. If you need to check your code a full listing to this point is provided in the lesson Code a Game - Part 2.</p>
         <p>When things are working, and now that you have done the work to support 2 balls, let's get more. Just set <code>TOTALBALLS = 20</code> or what about 50, 100 or even 1000?.</p>
         <div class="panel">
             <aside>Note</aside>
