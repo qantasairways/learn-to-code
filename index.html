@@ -127,7 +127,8 @@
                                         editor.setValue(text, -1)
                                     })
                             }
-                            document.getElementById('output').src = `${window.location.href}content/${path}/instructions.html`
+                            let base = window.location.href.split('#')[0]
+                            document.getElementById('output').src = `${base}content/${path}/instructions.html`
                             document.getElementById('reset').style.display = "inline"
                             document.getElementById('run').style.display = "inline"
                             document.getElementById('stop').style.display = "none"
@@ -175,10 +176,6 @@
             })
             editor.setTheme("ace/theme/twilight")
             editor.setFontSize(14)
-
-            window.onhashchange = function() {
-                window.location.reload()
-            }
 
             let hash = window.location.hash
             if (hash.startsWith('#')) {
@@ -270,11 +267,12 @@
             function showInstructions() {
                 let lessons = document.getElementById('lesson')
                 let output = document.getElementById('output')
+                let base = window.location.href.split('#')[0]
                 if (lessons.selectedIndex > 0) {
                     let path = lessons.options[lessons.selectedIndex].value
-                    output.src = `${window.location.href}content/${path}/instructions.html`
+                    output.src = `${base}content/${path}/instructions.html`
                 } else {
-                    output.src = `${window.location.href}content/intro.html`
+                    output.src = `${base}content/intro.html`
                 }
                 document.getElementById('run').style.display = "inline"
                 document.getElementById('stop').style.display = "none"
@@ -283,6 +281,7 @@
 
             function reload() {
                 let lessons = document.getElementById('lesson')
+                let base = window.location.href.split('#')[0]
                 if (lessons.selectedIndex > 0) {
                     let path = lessons.options[lessons.selectedIndex].value
                     fetch(`content/${path}/index.html`)
@@ -290,9 +289,9 @@
                         .then(text => {
                             editor.setValue(text, -1)
                         })
-                    document.getElementById('output').src = `${window.location.href}content/${path}/instructions.html`
+                    document.getElementById('output').src = `${base}content/${path}/instructions.html`
                 } else {
-                    document.getElementById('output').src = `${window.location.href}content/intro.html`
+                    document.getElementById('output').src = `${base}content/intro.html`
                 }
                 document.getElementById('run').style.display = "inline"
                 document.getElementById('stop').style.display = "none"
